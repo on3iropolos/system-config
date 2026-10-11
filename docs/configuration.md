@@ -31,5 +31,6 @@ docs/*.md
 - Every hook states behavior and user explicitly with `pre/post_hook_behavior` plus `run_hooks_as_user`.
 - Third-party repos use idempotent `scripts/*_repo.sh` or `scripts/install-*.sh` scripts, never inline curl-pipes.
 - One H1 per markdown file with strict ATX hierarchy and fenced blocks that always declare a language.
+- Descriptive links in prose, never bare URLs or "click here"; fenced shell commands may contain raw URLs (Flathub, pacman `Server`, `git clone`).
 - Every host, module, or script change needs a matching `docs/hosts.md` or `docs/modules.md` row.
 - Every such change also needs a [CHANGELOG](../CHANGELOG.md) entry.

@@ -6,3 +6,5 @@ system-packages-*.yaml
 dependencies-*.yaml
 installed.yaml
 declared-packages.yaml
+# Machine-local notes and prompts. Never commit these.
+.local/

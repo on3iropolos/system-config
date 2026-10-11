@@ -27,3 +27,4 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 - Canonical checkout is now `~/src/system-config` with `~/.config/arch-config` as a symlink; remote is `git@github.com:on3iropolos/system-config.git` on `main`.
 - Clarified plain `git` versus `dcli repo` workflow in `docs/operations.md`.
 - Clarified dcli hardcodes `~/.config/arch-config` on Arch and Ubuntu alike; `~/src` plus symlink applies to both hosts.
+- Ignored machine-local `.local/` notes and prompts; scoped the no-bare-URL rule to prose so fenced commands keep raw URLs.
