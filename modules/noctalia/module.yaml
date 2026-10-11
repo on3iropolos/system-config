@@ -6,5 +6,5 @@ conflicts:
 # Sync Noctalia session config from dotfiles/ to ~/.config/.
 dotfiles_sync: true
 dotfiles:
-  - source: noctalia
+  - source: dotfiles/noctalia
     target: ~/.config/noctalia

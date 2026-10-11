@@ -9,11 +9,12 @@ Only the `noctalia` module manages dotfiles in this pass.
 ```yaml
 dotfiles_sync: true
 dotfiles:
-  - source: noctalia
+  - source: dotfiles/noctalia
     target: ~/.config/noctalia
 ```
 
-Source directory `modules/noctalia/dotfiles/noctalia/` syncs to `~/.config/noctalia/`.
+Explicit dotfile sources are relative to the module root. Source directory
+`modules/noctalia/dotfiles/noctalia/` syncs to `~/.config/noctalia/`.
 Noctalia v5 reads every `*.toml` file there, so the managed file is `config.toml`.
 GUI overrides live in `~/.local/state/noctalia/settings.toml` and always win.
 See the [Noctalia configuration reference](https://docs.noctalia.dev/noctalia/configuration/) for all keys.
