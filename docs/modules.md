@@ -11,7 +11,7 @@ Reference for all seven modules. Must stay in sync with `modules/*/module.yaml` 
 | security | Bitwarden password manager | flatpak:com.bitwarden.desktop | none | none | machine-serial, stump |
 | dev | opencode AI agent | opencode | `install-opencode.sh` | none | machine-serial, stump |
 | desktop-gnome | Stock GNOME desktop | ubuntu-desktop-minimal | none | none | machine-serial |
-| noctalia | Noctalia + Umbriel + Greeter | noctalia, umbriel-git, noctalia-greeter | none | sync `dotfiles/` | stump |
+| noctalia | Noctalia + Umbriel + Greeter | noctalia, umbriel, noctalia-greeter | none | sync `dotfiles/` | stump |
 | cachyos-repo | CachyOS repo | cachyos-keyring, cachyos-mirrorlist | `add-cachyos-repo.sh` | none | not enabled |
 
 ## Package name notes
@@ -23,7 +23,8 @@ Reference for all seven modules. Must stay in sync with `modules/*/module.yaml` 
 - `opencode` installs from Arch extra on CachyOS and is excluded on `machine-serial`.
 - Bitwarden uses `flatpak:com.bitwarden.desktop` to dodge the apt and pacman divergence.
 - `ubuntu-desktop-minimal` is a no-op on stock Ubuntu and is scoped to `machine-serial`.
-- `noctalia` ships in Arch extra, `noctalia-greeter` in the CachyOS repos, `umbriel-git` in the AUR.
+- `noctalia` ships in Arch extra, `noctalia-greeter` and `umbriel` in the CachyOS repos.
+- `paru` stays required on `stump` for the AUR-only `brave-bin`.
 - `cachyos-repo` targets plain Arch hosts and stays disabled here.
 
 ## Hook notes

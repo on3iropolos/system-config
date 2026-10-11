@@ -43,3 +43,5 @@ Do not enable them by hand without the matching module change.
 
 - `greetd` wired to `noctalia-greeter-session` plus an Umbriel Wayland session entry.
 - `bluetooth` with `bluez` and `bluez-utils`.
+
+Follow the [Noctalia greeter installation](https://docs.noctalia.dev/greeter/installation/) when this pass lands: `greetd` must launch `noctalia-greeter-session` (not the `noctalia-greeter` binary) as user `greeter`, then enable `greetd` and disable the prior display manager.

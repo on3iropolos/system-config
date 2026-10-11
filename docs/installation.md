@@ -5,8 +5,19 @@ Follow the [dcli installation guide](https://gitlab.com/theblackdon/dcli#install
 
 ## CachyOS (stump)
 
+### Installer preferences
+
+Post-OS guide only; follow the [CachyOS preparation steps](https://wiki.cachyos.org/installation/installation_prepare/) and [CachyOS installation](https://wiki.cachyos.org/installation/installation_on_root/) as normative for the OS itself.
+Our preferences for `stump`:
+
+- Erase disk (single-disk, nothing to migrate), `btrfs` with default subvolumes, encryption on.
+- Bootloader `Limine`, UEFI with Secure Boot disabled, stable internet (online installer).
+- Minimal base (`No Desktop` selection); dcli provides Noctalia plus Umbriel plus Greeter.
+- Kernel `linux-cachyos` default, drivers via automatic detection (proprietary NVIDIA only if applicable).
+- User `on3i`, hostname `stump` set in the installer (`hostnamectl` below is a fallback).
+
 Install build tools, an AUR helper, and Flatpak first.
-CachyOS no longer preinstalls `paru`, and this repo needs AUR packages.
+CachyOS no longer preinstalls `paru`, and this repo needs AUR packages (`brave-bin`).
 
 ```bash
 sudo pacman -Syu
@@ -91,3 +102,4 @@ The Ubuntu work laptop follows the same `~/src` checkout plus symlink step; only
 
 - Read [docs/configuration.md](configuration.md) for the layout.
 - Read [docs/operations.md](operations.md) for daily commands.
+- Expect a TTY after first boot: `greetd` wiring for `noctalia-greeter-session` lands in a later pass, see [docs/services.md](services.md) and the [Noctalia greeter installation](https://docs.noctalia.dev/greeter/installation/).

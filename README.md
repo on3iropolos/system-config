@@ -36,7 +36,7 @@ Details: [docs/hosts.md](docs/hosts.md) and `hosts/machine-serial.yaml` plus `ho
 | security | Bitwarden password manager | flatpak:com.bitwarden.desktop | none | none | machine-serial, stump |
 | dev | opencode AI agent | opencode | `install-opencode.sh` | none | machine-serial, stump |
 | desktop-gnome | Stock GNOME desktop | ubuntu-desktop-minimal | none | none | machine-serial |
-| noctalia | Noctalia + Umbriel + Greeter | noctalia, umbriel-git, noctalia-greeter | none | sync `dotfiles/` | stump |
+| noctalia | Noctalia + Umbriel + Greeter | noctalia, umbriel, noctalia-greeter | none | sync `dotfiles/` | stump |
 | cachyos-repo | CachyOS repo | cachyos-keyring, cachyos-mirrorlist | `add-cachyos-repo.sh` | none | not enabled |
 
 Details: [docs/modules.md](docs/modules.md).

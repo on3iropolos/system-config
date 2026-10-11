@@ -2,5 +2,5 @@ description: Noctalia shell plus Umbriel compositor and Greeter for the CachyOS 
 
 packages:
   - noctalia # pacman: noctalia (extra, v5 shell) | apt: n/a (home host only)
-  - umbriel-git # pacman (AUR): umbriel-git | apt: n/a (home host only)
+  - umbriel # pacman: umbriel (CachyOS repo) | apt: n/a (home host only)
   - noctalia-greeter # pacman: noctalia-greeter (CachyOS repo) | apt: n/a (home host only)

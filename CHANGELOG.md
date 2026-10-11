@@ -28,3 +28,5 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 - Clarified plain `git` versus `dcli repo` workflow in `docs/operations.md`.
 - Clarified dcli hardcodes `~/.config/arch-config` on Arch and Ubuntu alike; `~/src` plus symlink applies to both hosts.
 - Ignored machine-local `.local/` notes and prompts; scoped the no-bare-URL rule to prose so fenced commands keep raw URLs.
+- Corrected `umbriel-git` (AUR placeholder) to `umbriel` from the CachyOS repos per [CachyOS-PKGBUILDS#1925](https://github.com/CachyOS/CachyOS-PKGBUILDS/issues/1925); `paru` stays required for AUR-only `brave-bin`.
+- Added CachyOS installer preferences for `stump` (erase disk, `btrfs`, encryption on, `Limine`, minimal base, `linux-cachyos`, hostname `stump`) with normative CachyOS wiki links; post-OS scope unchanged.
