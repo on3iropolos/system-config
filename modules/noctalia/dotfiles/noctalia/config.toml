@@ -1,0 +1,6 @@
+# Noctalia v5 session defaults managed by dcli dotfiles_sync.
+# Synced from modules/noctalia/dotfiles/noctalia/ to ~/.config/noctalia/.
+# Noctalia merges every *.toml file here; GUI overrides land in ~/.local/state/noctalia/settings.toml.
+# Full reference: Noctalia configuration docs (docs.noctalia.dev/noctalia/configuration/).
+[theme]
+mode = "dark"

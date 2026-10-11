@@ -1,0 +1,6 @@
+description: opencode AI coding agent on both hosts
+
+# Fallback installer for distros without a native package. Behavior: ask. Runs as the user.
+post_install_hook: scripts/install-opencode.sh
+post_hook_behavior: ask
+run_hooks_as_user: true

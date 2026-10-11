@@ -1,0 +1,4 @@
+description: Stock GNOME desktop for the Ubuntu work laptop
+
+packages:
+  - ubuntu-desktop-minimal # apt: ubuntu-desktop-minimal | pacman: n/a (work host only)

@@ -1,0 +1,18 @@
+# Shared settings imported by every host.
+# Keep distro-specific keys (package_manager, aur_helper) in hosts/*.yaml.
+
+flatpak_scope: user
+auto_prune: false
+
+config_backups:
+  enabled: true
+  max_backups: 5
+
+system_backups:
+  enabled: true
+  backup_on_sync: true
+  backup_on_update: true
+  tool: timeshift
+  max_backups: 5
+
+editor: nano # falls back to $EDITOR when set

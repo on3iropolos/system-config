@@ -1,0 +1,8 @@
+# dcli state, backups, and generated package lists. Never commit these.
+state/
+backups/
+*.backup
+system-packages-*.yaml
+dependencies-*.yaml
+installed.yaml
+declared-packages.yaml

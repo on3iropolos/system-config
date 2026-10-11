@@ -1,0 +1,5 @@
+description: Brave browser on both hosts
+
+packages:
+  - brave-bin # pacman (AUR): brave-bin | apt: n/a (excluded on machine-serial)
+  - brave-browser # apt: brave-browser (via Brave repo hook) | pacman: n/a (excluded on stump)

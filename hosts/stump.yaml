@@ -1,0 +1,49 @@
+host: stump
+description: Home laptop on CachyOS with Noctalia shell and Umbriel compositor
+
+import:
+  - hosts/shared/common.yaml
+
+# Ordered module list. Sequential keeps installation order deterministic.
+enabled_modules:
+  - base
+  - browser
+  - security
+  - dev
+  - noctalia
+
+# All packages live in modules. Keep this empty.
+packages: []
+
+# Exclude the work-only shell and the apt-only package names.
+# gh and brave-browser resolve on machine-serial instead.
+exclude:
+  - desktop-gnome
+  - gh
+  - brave-browser
+
+services:
+  enabled:
+    - NetworkManager
+  disabled: []
+
+default_apps:
+  scope: user
+  browser: brave
+
+flatpak_scope: user
+auto_prune: false
+module_processing: sequential
+aur_helper: paru
+editor: nano # falls back to $EDITOR when set
+
+config_backups:
+  enabled: true
+  max_backups: 5
+
+system_backups:
+  enabled: true
+  backup_on_sync: true
+  backup_on_update: true
+  tool: timeshift
+  max_backups: 5

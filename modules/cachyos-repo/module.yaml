@@ -1,0 +1,7 @@
+description: CachyOS repository setup for plain Arch hosts (example, not enabled)
+
+# Adds the CachyOS pacman repo before any other module installs. Behavior: once. Runs as root.
+# Genuine CachyOS systems already ship these repos, so the script exits as a no-op there.
+pre_install_hook: scripts/add-cachyos-repo.sh
+pre_hook_behavior: once
+run_hooks_as_user: false

@@ -1,0 +1,49 @@
+host: machine-serial
+description: Work laptop on Ubuntu with stock GNOME
+
+import:
+  - hosts/shared/common.yaml
+
+# Ordered module list. Parallel processing (default), no AUR on Ubuntu.
+enabled_modules:
+  - base
+  - browser
+  - security
+  - dev
+  - desktop-gnome
+
+# All packages live in modules. Keep this empty.
+packages: []
+
+# Exclude the home-only shell and the pacman-only package names.
+# github-cli, brave-bin, and opencode resolve on stump instead.
+exclude:
+  - noctalia
+  - github-cli
+  - brave-bin
+  - opencode
+
+services:
+  enabled:
+    - NetworkManager
+  disabled: []
+
+default_apps:
+  scope: user
+  browser: brave
+
+flatpak_scope: user
+auto_prune: false
+package_manager: apt
+editor: nano # falls back to $EDITOR when set
+
+config_backups:
+  enabled: true
+  max_backups: 5
+
+system_backups:
+  enabled: true
+  backup_on_sync: true
+  backup_on_update: true
+  tool: timeshift
+  max_backups: 5

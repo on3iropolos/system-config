@@ -1,0 +1,4 @@
+description: opencode AI coding agent on both hosts
+
+packages:
+  - opencode # pacman: opencode (extra) | apt: no native package, fallback post_install_hook

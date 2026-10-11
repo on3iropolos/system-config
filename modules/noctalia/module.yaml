@@ -1,0 +1,10 @@
+description: Noctalia shell plus Umbriel compositor and Greeter for the CachyOS home laptop
+
+conflicts:
+  - desktop-gnome
+
+# Sync Noctalia session config from dotfiles/ to ~/.config/.
+dotfiles_sync: true
+dotfiles:
+  - source: noctalia
+    target: ~/.config/noctalia

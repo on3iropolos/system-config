@@ -1,0 +1,6 @@
+description: Brave browser on both hosts
+
+# Hook adds the Brave apt repo on Ubuntu. Behavior: once. Runs as root.
+pre_install_hook: scripts/install-brave-apt.sh
+pre_hook_behavior: once
+run_hooks_as_user: false

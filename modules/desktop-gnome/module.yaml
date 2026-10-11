@@ -1,0 +1,4 @@
+description: Stock GNOME desktop for the Ubuntu work laptop
+
+conflicts:
+  - noctalia

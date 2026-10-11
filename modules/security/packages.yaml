@@ -1,0 +1,5 @@
+description: Bitwarden password manager on both hosts
+
+packages:
+  # Flatpak dodges the apt/pacman name divergence (apt manual install vs AUR bitwarden-bin).
+  - flatpak:com.bitwarden.desktop

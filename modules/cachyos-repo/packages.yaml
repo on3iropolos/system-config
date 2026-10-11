@@ -1,0 +1,5 @@
+description: CachyOS repository setup for plain Arch hosts (example, not enabled)
+
+packages:
+  - cachyos-keyring # pacman: cachyos-keyring | apt: n/a (home host only)
+  - cachyos-mirrorlist # pacman: cachyos-mirrorlist | apt: n/a (home host only)
