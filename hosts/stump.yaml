@@ -25,11 +25,13 @@ exclude:
 services:
   enabled:
     - NetworkManager
+    - greetd
   disabled: []
 
 default_apps:
   scope: user
   browser: brave-browser.desktop
+  terminal: Alacritty.desktop
 
 flatpak_scope: user
 auto_prune: false

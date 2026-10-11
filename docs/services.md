@@ -4,13 +4,15 @@ Minimal service and default-app policy for both hosts.
 
 ## Services
 
-Both hosts enable only `NetworkManager`, which the distro installers provide.
-Add services only with a package that provides them.
+Both hosts enable `NetworkManager`, which the distro installers provide.
+`stump` also enables `greetd`, supplied by the Noctalia module. Add services
+only with a package that provides them.
 
 ```yaml
 services:
   enabled:
     - NetworkManager
+    - greetd # stump only
   disabled: []
 ```
 
@@ -40,12 +42,18 @@ Capture live defaults before editing.
 dcli merge --defaults
 ```
 
+## Noctalia greeter
+
+The `noctalia` module configures `/etc/greetd/config.toml` through its
+idempotent root hook. It sets `greetd` to launch
+`noctalia-greeter-session` as the `greeter` user, then the host service policy
+enables `greetd`. Reboot after the first successful sync to start the graphical
+login screen.
+
+Keep another TTY available while changing display-manager configuration. See
+the [Noctalia greeter installation](https://docs.noctalia.dev/greeter/installation/)
+for recovery and compatibility guidance.
+
 ## Not yet covered
 
-These land in a later pass with their provider packages and hooks.
-Do not enable them by hand without the matching module change.
-
-- `greetd` wired to `noctalia-greeter-session` plus an Umbriel Wayland session entry.
 - `bluetooth` with `bluez` and `bluez-utils`.
-
-Follow the [Noctalia greeter installation](https://docs.noctalia.dev/greeter/installation/) when this pass lands: `greetd` must launch `noctalia-greeter-session` (not the `noctalia-greeter` binary) as user `greeter`, then enable `greetd` and disable the prior display manager.

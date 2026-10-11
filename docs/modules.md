@@ -11,7 +11,7 @@ Reference for all seven modules. Must stay in sync with `modules/*/module.yaml` 
 | security | Bitwarden password manager | flatpak:com.bitwarden.desktop | none | none | machine-serial, stump |
 | dev | opencode AI agent | opencode | `install-opencode.sh` | none | machine-serial, stump |
 | desktop-gnome | Stock GNOME desktop | ubuntu-desktop-minimal | none | none | machine-serial |
-| noctalia | Noctalia + Umbriel + Greeter | noctalia, umbriel, noctalia-greeter | none | sync `dotfiles/` | stump |
+| noctalia | Noctalia + Umbriel + Greeter | alacritty, greetd, noctalia, umbriel, noctalia-greeter, python | `configure-greetd.sh` | sync `dotfiles/` | stump |
 | cachyos-repo | CachyOS repo | cachyos-keyring, cachyos-mirrorlist | `add-cachyos-repo.sh` | none | not enabled |
 
 ## Package name notes
@@ -35,6 +35,7 @@ are set in each `module.yaml`.
 - `install-brave-apt.sh` runs as the browser pre-install hook, once, as root.
 - `install-opencode.sh` runs as the dev post-install hook, on ask, as the user.
 - `add-cachyos-repo.sh` runs as the cachyos-repo pre-install hook, once, as root.
+- `configure-greetd.sh` runs as the noctalia post-install hook, always, as root.
 
 ## Conflicts
 

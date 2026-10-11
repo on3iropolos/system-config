@@ -88,4 +88,6 @@ The Ubuntu work laptop follows the same `~/src` checkout plus symlink step; only
 
 - Read [docs/configuration.md](configuration.md) for the layout.
 - Read [docs/operations.md](operations.md) for daily commands.
-- Expect a TTY after first boot: `greetd` wiring for `noctalia-greeter-session` lands in a later pass, see [docs/services.md](services.md) and the [Noctalia greeter installation](https://docs.noctalia.dev/greeter/installation/).
+- After the initial `stump` sync, reboot to start the configured Noctalia Greeter.
+  Keep a TTY available for recovery; see [docs/services.md](services.md) and
+  the [Noctalia greeter installation](https://docs.noctalia.dev/greeter/installation/).
