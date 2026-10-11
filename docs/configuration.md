@@ -6,7 +6,7 @@ New dcli layout only: no `packages/` directory, no Lua, no Nix.
 ## Layout
 
 Canonical checkout is `~/src/system-config` on every machine.
-`~/.config/arch-config` is a symlink to it, because dcli reads that path.
+`~/.config/arch-config` is a symlink to it, because dcli hardcodes `~/.config/arch-config` on all distros (Arch and Ubuntu alike).
 Remote source of truth is `git@github.com:on3iropolos/system-config.git` on branch `main`.
 
 ```text

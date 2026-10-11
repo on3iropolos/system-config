@@ -63,8 +63,8 @@ ssh -T git@github.com
 
 ## Pull this repo
 
-Canonical checkout is `~/src/system-config`.
-`~/.config/arch-config` is a symlink for dcli, which reads that path.
+Canonical checkout is `~/src/system-config` on every machine.
+`~/.config/arch-config` is a symlink for dcli, which hardcodes that path on all distros (Arch and Ubuntu alike).
 Match the machine hostname, then verify.
 
 ```bash
@@ -85,6 +85,7 @@ dcli status
 ```
 
 Replace `stump` with `machine-serial` on the work laptop.
+The Ubuntu work laptop follows the same `~/src` checkout plus symlink step; only `host: machine-serial` and the apt install method differ.
 
 ## Next steps
 
