@@ -14,7 +14,7 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 
 ### Changed
 
-- `noctalia` now installs Alacritty and manages `greetd` with the
+- `noctalia` now installs Kitty and manages `greetd` with the
   `noctalia-greeter-session` wrapper for graphical login on `stump`.
 - `cachyos-repo` is now a plain-Arch example and no longer enabled on `stump`.
 - Variant package names resolve per host via dual entries plus `exclude:`.

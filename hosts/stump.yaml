@@ -31,7 +31,7 @@ services:
 default_apps:
   scope: user
   browser: brave-browser.desktop
-  terminal: Alacritty.desktop
+  terminal: kitty.desktop
 
 flatpak_scope: user
 auto_prune: false
