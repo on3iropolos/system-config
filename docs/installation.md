@@ -25,20 +25,14 @@ sudo pacman -S --needed git base-devel paru flatpak timeshift
 flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
 
-Use the binary repo, no compiling needed.
+Install dcli from the AUR. The upstream GitLab Pages binary repository currently
+returns HTTP 403 for its package database, so do not add it to `pacman.conf`.
+The `dcli-arch-git` package builds the latest dcli source locally and is the
+upstream-supported fallback.
 
 ```bash
-sudo nano /etc/pacman.conf
-```
-
-```ini
-[dcli]
-SigLevel = Never
-Server = https://theblackdon.gitlab.io/dcli/$arch
-```
-
-```bash
-sudo pacman -Sy dcli
+paru -S --needed dcli-arch-git
+dcli --version
 ```
 
 ## Ubuntu (machine-serial)
@@ -56,31 +50,16 @@ cd dcli
 
 The script builds the release binary and installs to `/usr/local/bin/dcli`.
 
-## SSH access
-
-Generate a key and add it to GitHub before cloning.
-The canonical remote is SSH: `git@github.com:on3iropolos/system-config.git`.
-
-```bash
-ssh-keygen -t ed25519
-cat ~/.ssh/id_ed25519.pub
-```
-
-Verify access with `ssh -T` against GitHub before continuing.
-
-```bash
-ssh -T git@github.com
-```
-
 ## Pull this repo
 
 Canonical checkout is `~/src/system-config` on every machine.
 `~/.config/arch-config` is a symlink for dcli, which hardcodes that path on all distros (Arch and Ubuntu alike).
-Match the machine hostname, then verify.
+Clone the public repository over HTTPS; SSH is configured after system bootstrap,
+before the first push. Match the machine hostname, then verify.
 
 ```bash
 mkdir -p ~/src
-git clone git@github.com:on3iropolos/system-config.git ~/src/system-config
+git clone https://github.com/on3iropolos/system-config.git ~/src/system-config
 mkdir -p ~/.config
 ln -s ~/src/system-config ~/.config/arch-config
 ls -l ~/.config/arch-config

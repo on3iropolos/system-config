@@ -1,5 +1,8 @@
 # Shared settings imported by every host.
+# dcli parses imports as full configurations, so `host` is required even though
+# the importing host retains its own value.
 # Keep distro-specific keys (package_manager, aur_helper) in hosts/*.yaml.
+host: shared-common
 
 flatpak_scope: user
 auto_prune: false
