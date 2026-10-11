@@ -5,10 +5,29 @@ How-to for daily dcli commands in this repository.
 ## First sync
 
 ```bash
-dcli validate
-dcli merge --dry-run
-dcli sync --dry-run
+dcli status
 dcli sync
+dcli validate
+dcli status
+```
+
+Use this sequence for a blank system. The initial sync installs the packages
+that provide configured default-application desktop files, so validation belongs
+after the system has converged.
+
+`stump` uses sequential module processing. dcli does not currently provide a
+complete package preview for sequential `dcli sync --dry-run`; review
+`dcli status` before running the initial sync instead.
+
+## Capture existing unmanaged packages
+
+Run merge only when deliberately adopting packages installed outside dcli. Do
+not run it during a blank-system bootstrap, because it can capture installer
+and setup packages that do not belong in this configuration.
+
+```bash
+dcli merge --dry-run
+dcli merge
 ```
 
 ## Services and defaults
@@ -21,11 +40,15 @@ dcli merge --defaults
 ## Ongoing sync
 
 ```bash
+dcli validate
 dcli sync --dry-run
 dcli sync
-dcli sync --prune
 dcli status
 ```
+
+Use `dcli sync --prune` only after reviewing the packages that would be
+removed. On `stump`, the sequential-processing dry-run limitation still
+applies.
 
 ## Modules
 

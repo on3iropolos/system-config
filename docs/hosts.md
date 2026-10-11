@@ -33,7 +33,8 @@ exclude:
 ```
 
 Processing stays on the dcli default (`parallel`).
-Sets `package_manager: apt`, `flatpak_scope: user`, `auto_prune: false`, and `default_apps` browser `brave`.
+Sets `package_manager: apt`, `flatpak_scope: user`, `auto_prune: false`, and
+`default_apps` browser `brave-browser.desktop`.
 Backups use `config_backups.max_backups: 5` and `system_backups.tool: timeshift`.
 `editor: nano` falls back to `$EDITOR` when set.
 

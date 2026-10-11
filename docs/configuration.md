@@ -18,7 +18,7 @@ hosts/stump.yaml
 hosts/shared/common.yaml
 modules/<name>/module.yaml
 modules/<name>/packages.yaml
-scripts/*.sh
+modules/<name>/scripts/*.sh
 docs/*.md
 ```
 
@@ -29,7 +29,8 @@ docs/*.md
 - Host files stay minimal with `packages: []` and shared settings in `hosts/shared/common.yaml`.
 - Every package entry notes distro validity when names differ with `# apt: X | pacman: Y`.
 - Every hook states behavior and user explicitly with `pre/post_hook_behavior` plus `run_hooks_as_user`.
-- Third-party repos use idempotent `scripts/*_repo.sh` or `scripts/install-*.sh` scripts, never inline curl-pipes.
+- Hooks live in the owning module's `scripts/` directory and use idempotent
+  `*_repo.sh` or `install-*.sh` scripts, never inline curl-pipes.
 - One H1 per markdown file with strict ATX hierarchy and fenced blocks that always declare a language.
 - Descriptive links in prose, never bare URLs or "click here"; fenced shell commands may contain raw URLs (Flathub, pacman `Server`, `git clone`).
 - Every host, module, or script change needs a matching `docs/hosts.md` or `docs/modules.md` row.

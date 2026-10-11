@@ -27,8 +27,12 @@ Both hosts set Brave as the user-scope browser.
 ```yaml
 default_apps:
   scope: user
-  browser: brave
+  browser: brave-browser.desktop
 ```
+
+Default applications use the installed `.desktop` file ID, not a package or
+product name. `brave-bin` on CachyOS and `brave-browser` on Ubuntu provide
+`brave-browser.desktop`.
 
 Capture live defaults before editing.
 

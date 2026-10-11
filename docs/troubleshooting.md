@@ -36,8 +36,29 @@ dcli status
 ```
 
 `gh` installs on Ubuntu and is excluded on CachyOS, where `github-cli` provides it.
-`brave-browser` installs on Ubuntu via `scripts/install-brave-apt.sh`.
+`brave-browser` installs on Ubuntu via
+`modules/browser/scripts/install-brave-apt.sh`.
 `brave-bin` installs on CachyOS via `paru` and is excluded on Ubuntu.
+
+## Default application validation fails during bootstrap
+
+On a blank system, a configured application package may not have installed its
+`.desktop` file yet. Run the initial sync before validation:
+
+```bash
+dcli sync
+dcli validate
+```
+
+For `stump`, confirm the expected Brave desktop-file ID after sync:
+
+```bash
+pacman -Ql brave-bin | grep '/usr/share/applications/.*\.desktop$'
+```
+
+Use `brave-browser.desktop` in `default_apps`. Do not install a declared
+package manually just to satisfy pre-sync validation; the initial dcli sync
+installs it.
 
 ## opencode missing
 
@@ -46,7 +67,7 @@ The `dev` post-install hook installs it per user.
 
 ```bash
 command -v opencode
-bash scripts/install-opencode.sh
+bash modules/dev/scripts/install-opencode.sh
 ```
 
 On CachyOS prefer the native package.
@@ -58,7 +79,8 @@ sudo pacman -S opencode
 ## CachyOS repo hook is a no-op
 
 Genuine CachyOS systems already configure the CachyOS repos.
-`scripts/add-cachyos-repo.sh` detects `[cachyos]` and skips.
+`modules/cachyos-repo/scripts/add-cachyos-repo.sh` detects `[cachyos]` and
+skips.
 The `cachyos-repo` module targets plain Arch hosts and is not enabled here.
 
 ## Noctalia config rejected

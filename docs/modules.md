@@ -29,7 +29,8 @@ Reference for all seven modules. Must stay in sync with `modules/*/module.yaml` 
 
 ## Hook notes
 
-Full paths live in `scripts/`, and behavior plus user are set in each `module.yaml`.
+Hooks live in the owning module's `scripts/` directory, and behavior plus user
+are set in each `module.yaml`.
 
 - `install-brave-apt.sh` runs as the browser pre-install hook, once, as root.
 - `install-opencode.sh` runs as the dev post-install hook, on ask, as the user.

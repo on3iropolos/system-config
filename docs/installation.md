@@ -67,12 +67,19 @@ sudo hostnamectl set-hostname stump
 hostname
 ```
 
-Set `host: stump` in `~/src/system-config/config.yaml`, then run:
+Set `host: stump` in `~/src/system-config/config.yaml`, then bootstrap the
+machine:
 
 ```bash
+dcli status
+dcli sync
 dcli validate
 dcli status
 ```
+
+The first sync installs declared packages before configuring default
+applications. Run validation afterward because the configured desktop-file IDs
+do not exist until their provider packages have been installed.
 
 Replace `stump` with `machine-serial` on the work laptop.
 The Ubuntu work laptop follows the same `~/src` checkout plus symlink step; only `host: machine-serial` and the apt install method differ.

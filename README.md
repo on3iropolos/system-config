@@ -5,18 +5,19 @@ Declarative [dcli](https://gitlab.com/theblackdon/dcli) setup for two Linux lapt
 `stump` runs CachyOS with the Noctalia shell family for home.
 Shared core tools live in `modules/` so both hosts stay in sync.
 
-## Quick-start
+## Daily workflow after bootstrap
 
 ```bash
 dcli validate
 dcli sync --dry-run
 dcli sync
-dcli repo push
 dcli status
 ```
 
-See [docs/installation.md](docs/installation.md) for per-distro install steps.
-First-time checkout on a fresh machine: clone to `~/src/system-config` and symlink `~/.config/arch-config` to it, per [docs/installation.md](docs/installation.md).
+For a blank-system bootstrap, follow [docs/installation.md](docs/installation.md).
+First-time checkout is `~/src/system-config`, with `~/.config/arch-config`
+symlinked to it. Commit and push configuration changes separately through the
+[Git workflow](docs/operations.md#git-workflow).
 
 ## Hosts
 
