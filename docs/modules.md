@@ -24,6 +24,8 @@ Reference for all seven modules. Must stay in sync with `modules/*/module.yaml` 
 - Bitwarden uses `flatpak:com.bitwarden.desktop` to dodge the apt and pacman divergence.
 - `ubuntu-desktop-minimal` is a no-op on stock Ubuntu and is scoped to `machine-serial`.
 - `noctalia` ships in Arch extra, `noctalia-greeter` and `umbriel` in the CachyOS repos.
+- Umbriel autostarts Noctalia and owns the Noctalia IPC keybindings through the
+  Noctalia module's managed Umbriel dotfile.
 - `paru` stays required on `stump` for the AUR-only `brave-bin`.
 - `cachyos-repo` targets plain Arch hosts and stays disabled here.
 
