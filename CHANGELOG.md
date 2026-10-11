@@ -17,6 +17,7 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 - `noctalia` now installs Kitty and manages `greetd` with the
   `noctalia-greeter-session` wrapper for graphical login on `stump`.
 - Umbriel now autostarts Noctalia and supplies its standard IPC keybindings.
+- Umbriel configures stump's internal 3000x2000 `eDP-1` panel at 1.5 scale.
 - `cachyos-repo` is now a plain-Arch example and no longer enabled on `stump`.
 - Variant package names resolve per host via dual entries plus `exclude:`.
 - Noctalia dotfiles ship valid v5 `config.toml` instead of the v4-style stub.

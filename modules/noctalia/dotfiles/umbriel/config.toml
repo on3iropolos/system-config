@@ -3,6 +3,13 @@
 [general]
 autostart = ["noctalia"]
 
+# Internal laptop panel. Positions stay automatic because stump currently has
+# one display.
+[output.eDP-1]
+mode = "3000x2000"
+scale = 1.5
+focus_at_startup = true
+
 # Noctalia shell controls. `Mod` is Umbriel's configured modifier (Super by
 # default in a native session).
 [keybinds]

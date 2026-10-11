@@ -62,5 +62,6 @@ exclude:
 
 Sets `aur_helper: paru`, `module_processing: sequential`, `flatpak_scope: user`,
 and `auto_prune: false`. The Noctalia module supplies Kitty and configures
-and enables the `greetd` Noctalia Greeter session.
+and enables the `greetd` Noctalia Greeter session. Its managed Umbriel
+configuration sets the internal `eDP-1` 3000x2000 panel to 1.5 scale.
 Install `paru` first per [docs/installation.md](installation.md), since CachyOS no longer preinstalls it.

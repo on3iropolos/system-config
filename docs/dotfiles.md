@@ -23,7 +23,8 @@ See the [Noctalia configuration reference](https://docs.noctalia.dev/noctalia/co
 `modules/noctalia/dotfiles/umbriel/config.toml` syncs to
 `~/.config/umbriel/config.toml`. It autostarts Noctalia and defines the standard
 Noctalia launcher, control-center, settings, window-switcher, audio, and
-brightness shortcuts.
+brightness shortcuts. Its `eDP-1` output policy configures stump's internal
+3000x2000 panel at 1.5 scale.
 
 ## Commands
 
