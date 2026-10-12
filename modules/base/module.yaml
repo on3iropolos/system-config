@@ -1,1 +1,9 @@
 description: Shared core tools enabled on both hosts
+
+# Give timeshift a persistent btrfs snapshot store before the first sync takes
+# its system backup. Without a config, timeshift stages snapshots under /run,
+# which is tmpfs, and discards them on exit while reporting success. Behavior:
+# once. Runs as root.
+pre_install_hook: scripts/install-timeshift.sh
+pre_hook_behavior: once
+run_hooks_as_user: false

@@ -35,7 +35,7 @@ Details: [docs/hosts.md](docs/hosts.md) and `hosts/machine-serial.yaml` plus `ho
 
 | Module | Description | Packages | Hooks | Dotfiles | Enabled on |
 |---|---|---|---|---|---|
-| base | Shared core tools | fzf, xdg-utils, flatpak, timeshift | none | none | machine-serial, stump |
+| base | Shared core tools | fzf, xdg-utils, flatpak, timeshift | `install-timeshift.sh` | none | machine-serial, stump |
 | cachyos | CachyOS repo tooling and shell defaults | paru, cachyos-fish-config | none | none | stump |
 | git | Git identity and GitHub CLI | git, github-cli | none | `~/.gitconfig` | machine-serial, stump |
 | ssh | OpenSSH client and GitHub identity | openssh | none | `~/.ssh/config` | machine-serial, stump |

@@ -50,6 +50,11 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 - Recorded the adopted baseline policy for `stump` in `docs/hosts.md`, which
   keeps the roughly 171 packages the CachyOS installer placed on this machine
   deliberately undeclared instead of capturing them with `dcli merge`.
+- Added a `base` pre-install hook that writes `/etc/timeshift/timeshift.json`,
+  enabling btrfs-mode snapshots that include `/home`. Without it, timeshift runs
+  in first-run mode, stages snapshots under the `/run` tmpfs, and discards them
+  on exit while still reporting success, so `system_backups` would appear to
+  work while persisting nothing.
 
 ### Fixed
 
@@ -61,6 +66,10 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
   documented precondition, reviewing removals first, cannot be met there because
   sequential processing has no dry-run preview, and the removals would include
   the kernel and GPU drivers.
+- Documented that the `/etc/timeshift/default.json` shipped by the timeshift
+  package is stale against the installed binary, which reads
+  `include_btrfs_home_for_backup` and `include_btrfs_home_for_restore` instead of
+  the removed `include_btrfs_home`.
 - Documented `paru`, `base-devel`, `git`, Flatpak, and Flathub prerequisites.
 - Corrected `noctalia-greeter` to the CachyOS repo package with greetd wiring notes.
 - Pinned `timeshift` as a CachyOS prerequisite so `system_backups` works on a bare base.

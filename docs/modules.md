@@ -6,7 +6,7 @@ Reference for all thirteen modules. Must stay in sync with `modules/*/module.yam
 
 | Module | Description | Packages | Hooks | Dotfiles | Enabled on |
 |---|---|---|---|---|---|
-| base | Shared core tools | fzf, xdg-utils, flatpak, timeshift | none | none | machine-serial, stump |
+| base | Shared core tools | fzf, xdg-utils, flatpak, timeshift | `install-timeshift.sh` | none | machine-serial, stump |
 | cachyos | CachyOS repo tooling and shell defaults | paru, cachyos-fish-config | none | none | stump |
 | git | Git identity and GitHub CLI | git, github-cli | none | `~/.gitconfig` | machine-serial, stump |
 | ssh | OpenSSH client and GitHub identity | openssh | none | `~/.ssh/config` | machine-serial, stump |
@@ -34,6 +34,8 @@ Reference for all thirteen modules. Must stay in sync with `modules/*/module.yam
 - `timeshift` is declared in `base` because both hosts set it as the
   `system_backups` tool. `backup_on_sync` fires before module processing, so on
   a blank system it must already be installed; see [Installation](installation.md).
+  Its `pre_install_hook` writes `/etc/timeshift/timeshift.json` so snapshots land
+  on the disk instead of a tmpfs staging path; see [system backups](services.md#system-backups).
 - `paru` and `cachyos-fish-config` are CachyOS-only names and live in the
   `cachyos` module, scoped to `stump` so they never reach `machine-serial`.
 - `cachyos-fish-config` is the file `~/.config/fish/config.fish` sources.
@@ -63,6 +65,7 @@ Hooks live in the owning module's `scripts/` directory, and behavior plus user
 are set in each `module.yaml`.
 
 - `install-brave-apt.sh` runs as the browser pre-install hook, once, as root.
+- `install-timeshift.sh` runs as the base pre-install hook, once, as root.
 - `install-opencode.sh` runs as the dev post-install hook, on ask, as the user.
 - `add-cachyos-repo.sh` runs as the cachyos-repo pre-install hook, once, as root.
 - `configure-greetd.sh` runs as the noctalia post-install hook, always, as root.
