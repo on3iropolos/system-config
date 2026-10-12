@@ -1,0 +1,5 @@
+# dcli regenerates everything in this directory on demand, so the whole
+# directory is ignored from here as well as from the repository root. This file
+# stays tracked because dcli validate expects it to exist.
+*
+!.gitignore

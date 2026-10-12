@@ -34,6 +34,8 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
   capture instead of `eval`, which fish rejects during startup.
 - Installation guidance now clones over HTTPS first and switches the remote to
   SSH after the first sync, instead of configuring SSH ad hoc.
+- `state/` is now ignored via `state/*` with `state/.gitignore` re-included, so
+  the tracked marker file dcli validate expects can actually be committed.
 
 ### Fixed
 

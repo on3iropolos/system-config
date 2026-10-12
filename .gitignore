@@ -1,5 +1,8 @@
 # dcli state, backups, and generated package lists. Never commit these.
-state/
+# state/ ignores contents but keeps state/.gitignore trackable, which dcli
+# requires. A bare state/ rule would make that file impossible to re-include.
+state/*
+!state/.gitignore
 backups/
 *.backup
 system-packages-*.yaml
