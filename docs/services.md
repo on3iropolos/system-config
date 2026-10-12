@@ -33,8 +33,8 @@ default_apps:
 ```
 
 Default applications use the installed `.desktop` file ID, not a package or
-product name. `brave-bin` on CachyOS and `brave-browser` on Ubuntu provide
-`brave-browser.desktop`.
+product name. `brave-bin` on CachyOS provides `brave-browser.desktop`, as does
+`brave-browser` on Ubuntu once that host is brought back.
 
 Capture live defaults before editing.
 

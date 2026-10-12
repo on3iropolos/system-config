@@ -18,12 +18,12 @@ enabled_modules:
 # All packages live in modules. Keep this empty.
 packages: []
 
-# Exclude the work-only shell and the apt-only package names.
-# gh and brave-browser resolve on machine-serial instead.
+# Exclude the work-only shell. Package-level exclusions are unused: the shared
+# modules currently declare only names that resolve on CachyOS. The mechanism is
+# retained because it still works on the dcli declaration path and is needed
+# again once machine-serial returns.
 exclude:
   - desktop-gnome
-  - gh
-  - brave-browser
 
 services:
   enabled:

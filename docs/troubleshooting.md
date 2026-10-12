@@ -35,10 +35,15 @@ dcli find <package>
 dcli status
 ```
 
-`gh` installs on Ubuntu and is excluded on CachyOS, where `github-cli` provides it.
-`brave-browser` installs on Ubuntu via
-`modules/browser/scripts/install-brave-apt.sh`.
-`brave-bin` installs on CachyOS via `paru` and is excluded on Ubuntu.
+Package names used to resolve per host by declaring both variants and dropping
+the inapplicable one through the host `exclude:` list. That mechanism is
+unreliable during sync: dcli applies `exclude:` when counting declared packages
+but still attempts the excluded names during install. The modules therefore
+declare only CachyOS-resolvable names, `github-cli` and `brave-bin`, and the
+apt names `gh` and `brave-browser` are deferred with `machine-serial`.
+
+If a sync attempts a package that the host does not have, check whether the
+module still declares it before suspecting the package manager.
 
 ## Default application validation fails during bootstrap
 

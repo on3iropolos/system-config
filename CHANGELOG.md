@@ -24,7 +24,8 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 - Umbriel now autostarts Noctalia and supplies its standard IPC keybindings.
 - Umbriel configures stump's internal 3000x2000 `eDP-1` panel at 1.5 scale.
 - `cachyos-repo` is now a plain-Arch example and no longer enabled on `stump`.
-- Variant package names resolve per host via dual entries plus `exclude:`.
+- Variant package names resolved per host via dual entries plus `exclude:`. The
+  dual-entry pattern is now dormant with `machine-serial`.
 - Noctalia dotfiles ship valid v5 `config.toml` instead of the v4-style stub.
 - Both hosts enable only `NetworkManager` until later passes add providers.
 - `git`, `gh`, and `github-cli` moved out of `base` into the new `git` module so
@@ -36,9 +37,18 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
   SSH after the first sync, instead of configuring SSH ad hoc.
 - `state/` is now ignored via `state/*` with `state/.gitignore` re-included, so
   the tracked marker file dcli validate expects can actually be committed.
+- `machine-serial` is deferred so `stump` can be stabilised first. The `git` and
+  `browser` modules now declare only CachyOS-resolvable package names, which
+  removes the per-sync `gh` install failure caused by the upstream defect
+  recorded in `.local/dcli-bugs.md`.
+- Re-adding `machine-serial` requires `gh`, `brave-browser`, and a separate
+  `openssh-client` entry, plus restoring the package-level excludes on both
+  hosts. See the deferral notes in `docs/hosts.md`.
 
 ### Fixed
 
+- `docs/hosts.md` listed the module sets from before `git`, `ssh`, and `fish`
+  were added, so the host reference had drifted from `hosts/*.yaml`.
 - Documented `paru`, `base-devel`, `git`, Flatpak, and Flathub prerequisites.
 - Corrected `noctalia-greeter` to the CachyOS repo package with greetd wiring notes.
 - Pinned `timeshift` as a CachyOS prerequisite so `system_backups` works on a bare base.

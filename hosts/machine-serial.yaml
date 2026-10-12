@@ -1,3 +1,6 @@
+# Deferred: dormant while stump is stabilised. The modules it enables no longer
+# declare the apt package names it excludes, so this file is not currently
+# accurate. Re-add those entries before switching config.yaml to this host.
 host: machine-serial
 description: Work laptop on Ubuntu with stock GNOME
 

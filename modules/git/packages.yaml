@@ -1,6 +1,8 @@
-description: Git identity for the shared GitHub account on both hosts
+description: Git identity and GitHub CLI
 
+# Stump-only package set. `gh` is the Ubuntu name; on CachyOS the equivalent is
+# `github-cli`, which owns /usr/bin/gh. The Ubuntu variant is re-added when
+# machine-serial is brought back; see CHANGELOG.
 packages:
-  - git # apt: git | pacman: git
-  - gh # apt: gh | pacman: n/a (excluded on stump, see github-cli)
-  - github-cli # pacman: github-cli (provides gh) | apt: n/a (excluded on machine-serial)
+  - git # both hosts
+  - github-cli # pacman: github-cli (provides gh) | apt: n/a (deferred, machine-serial dormant)
