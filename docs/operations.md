@@ -30,6 +30,13 @@ dcli merge --dry-run
 dcli merge
 ```
 
+Neither host currently uses this. `stump` carries an adopted baseline of roughly
+171 unmanaged packages from the CachyOS installer, and declaring them wholesale
+would tie the configuration to one distro release and one machine's hardware.
+The small subset the configuration actually depends on is declared by hand in
+the `cachyos`, `base`, `cli-tools`, and `editors` modules. See the
+[adopted baseline](hosts.md#adopted-baseline) notes.
+
 ## Services and defaults
 
 ```bash
@@ -46,9 +53,10 @@ dcli sync
 dcli status
 ```
 
-Use `dcli sync --prune` only after reviewing the packages that would be
-removed. On `stump`, the sequential-processing dry-run limitation still
-applies.
+Do not run `dcli sync --prune` on `stump`. That host runs sequential module
+processing, so `dcli sync --dry-run` cannot preview what would be removed, and
+the removals would include the adopted baseline, the kernel, and the GPU
+drivers. See [never prune stump](hosts.md#never-prune-stump).
 
 ## Modules
 

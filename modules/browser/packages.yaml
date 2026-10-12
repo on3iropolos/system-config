@@ -3,4 +3,4 @@ description: Brave browser
 # Stump-only package set. The apt package name is re-added when machine-serial
 # is brought back; see CHANGELOG.
 packages:
-  - brave-bin # pacman (AUR, via paru) | apt: n/a (deferred, machine-serial dormant)
+  - brave-bin # cachyos repo: official package, not AUR | apt: n/a (deferred, machine-serial dormant)

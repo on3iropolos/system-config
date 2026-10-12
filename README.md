@@ -35,10 +35,13 @@ Details: [docs/hosts.md](docs/hosts.md) and `hosts/machine-serial.yaml` plus `ho
 
 | Module | Description | Packages | Hooks | Dotfiles | Enabled on |
 |---|---|---|---|---|---|
-| base | Shared core tools | fzf, xdg-utils, flatpak | none | none | machine-serial, stump |
+| base | Shared core tools | fzf, xdg-utils, flatpak, timeshift | none | none | machine-serial, stump |
+| cachyos | CachyOS repo tooling and shell defaults | paru, cachyos-fish-config | none | none | stump |
 | git | Git identity and GitHub CLI | git, github-cli | none | `~/.gitconfig` | machine-serial, stump |
 | ssh | OpenSSH client and GitHub identity | openssh | none | `~/.ssh/config` | machine-serial, stump |
 | fish | fish shell and ssh-agent bootstrap | fish | none | `~/.config/fish/conf.d/ssh-agent.fish` | machine-serial, stump |
+| cli-tools | Command-line utilities | alacritty, btop, duf, fastfetch, glances, ripgrep, wget, rsync, plocate | none | none | machine-serial, stump |
+| editors | Text and GUI editors | nano, nano-syntax-highlighting, vim, vscodium | none | none | machine-serial, stump |
 | browser | Brave browser | brave-bin | `install-brave-apt.sh` | none | machine-serial, stump |
 | security | Bitwarden password manager | flatpak:com.bitwarden.desktop | none | none | machine-serial, stump |
 | dev | opencode AI agent | opencode | `install-opencode.sh` | none | machine-serial, stump |

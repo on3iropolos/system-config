@@ -1,0 +1,8 @@
+description: Editors adopted from the existing system
+
+# Declared by their pacman package names, not the binaries they provide.
+packages:
+  - nano # default editor for both hosts, with syntax highlighting rules
+  - nano-syntax-highlighting # companion rules for `nano`
+  - vim # pacman: vim | apt: vim
+  - vscodium # provides `codium` and `vscodium` binaries

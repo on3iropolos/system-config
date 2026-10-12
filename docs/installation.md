@@ -17,13 +17,20 @@ Our preferences for `stump`:
 - User `on3i`, hostname `stump` set in the installer (`hostnamectl` below is a fallback).
 
 Install build tools, an AUR helper, and Flatpak first.
-CachyOS no longer preinstalls `paru`, and this repo needs AUR packages (`brave-bin`).
+CachyOS no longer preinstalls `paru`, which stays declared on `stump` because
+`aur_helper` names it.
 
 ```bash
 sudo pacman -Syu
 sudo pacman -S --needed git base-devel paru flatpak timeshift
 flatpak remote-add --if-not-exists --user flathub https://flathub.org/repo/flathub.flatpakrepo
 ```
+
+`timeshift` must be present before the first sync, because `system_backups`
+takes a snapshot before module processing runs. `cachyos-fish-config` ships with
+the CachyOS desktop profile and supplies the file `config.fish` sources. Both
+are declared in the repository, but a blank system needs them present before dcli
+can manage anything.
 
 Install dcli from the AUR. The upstream GitLab Pages binary repository currently
 returns HTTP 403 for its package database, so do not add it to `pacman.conf`.

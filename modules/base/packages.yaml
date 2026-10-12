@@ -4,3 +4,4 @@ packages:
   - fzf # apt: fzf | pacman: fzf (dcli TUI dependency)
   - xdg-utils # apt: xdg-utils | pacman: xdg-utils (dcli default-apps dependency)
   - flatpak # apt: flatpak | pacman: flatpak (Bitwarden flatpak runtime)
+  - timeshift # pacman: timeshift | apt: timeshift (system_backups tool on both hosts)

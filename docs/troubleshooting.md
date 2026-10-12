@@ -4,7 +4,9 @@ How-to for common failures in this repository.
 
 ## AUR helper missing on CachyOS
 
-CachyOS no longer preinstalls `paru`, but `stump` pins it and needs AUR packages.
+CachyOS no longer preinstalls `paru`, but `stump` declares it because
+`aur_helper` names it. No package in this repository is AUR-backed, so a missing
+`paru` affects manual installs only, never `dcli sync`.
 
 ```bash
 sudo pacman -S --needed git base-devel paru

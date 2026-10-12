@@ -10,7 +10,7 @@ Reference for both host files. Must stay in sync with `hosts/*.yaml`.
 | Host | File | Distro | Manager | Processing | Modules |
 |---|---|---|---|---|---|
 | machine-serial | `hosts/machine-serial.yaml` | Ubuntu | apt | parallel | base, browser, security, dev, desktop-gnome |
-| stump | `hosts/stump.yaml` | CachyOS | pacman + paru | sequential | base, git, ssh, fish, browser, security, dev, noctalia |
+| stump | `hosts/stump.yaml` | CachyOS | pacman + paru | sequential | base, cachyos, git, ssh, fish, cli-tools, editors, browser, security, dev, noctalia |
 
 ## machine-serial
 
@@ -52,9 +52,12 @@ import:
   - hosts/shared/common.yaml
 enabled_modules:
   - base
+  - cachyos
   - git
   - ssh
   - fish
+  - cli-tools
+  - editors
   - browser
   - security
   - dev
@@ -68,12 +71,51 @@ Sets `aur_helper: paru`, `module_processing: sequential`, `flatpak_scope: user`,
 and `auto_prune: false`. The Noctalia module supplies Kitty and configures
 and enables the `greetd` Noctalia Greeter session. Its managed Umbriel
 configuration sets the internal `eDP-1` 3000x2000 panel to 1.5 scale.
-Install `paru` first per [docs/installation.md](installation.md), since CachyOS no longer preinstalls it.
+Install `paru` first per [docs/installation.md](installation.md), because CachyOS no longer preinstalls it.
 
 `exclude:` currently carries only `desktop-gnome`, a module name. There are no
 package-level exclusions because the shared modules declare only names that
 resolve on CachyOS. The key is retained: it still applies on the dcli
 declaration path, and it is needed again once machine-serial returns.
+
+## Adopted baseline
+
+`stump` did not start from the minimal profile in
+[docs/installation.md](installation.md). It is an existing CachyOS desktop that
+dcli was retrofitted onto, so it carries roughly 171 packages the config does
+not declare, plus 7 flatpak runtime layers that flatpak manages itself.
+
+Those are deliberately left unmanaged. They are the OS installer's artifacts,
+hardware drivers for this machine's GPU and firmware, kernels and boot tooling,
+desktop fonts, and storage utilities implied by the chosen layout. Declaring
+them would tie the configuration to one distro release and to this exact
+hardware, and none of it is portable to `machine-serial`.
+
+A small, deliberate subset *is* declared, because the configuration depends on
+it or because it is a genuine choice rather than installer residue:
+
+- `paru` and `cachyos-fish-config`, in the `cachyos` module. The first backs
+  `aur_helper`, the second is the file `config.fish` sources.
+- `timeshift`, in `base`, because both hosts set it as the backup tool.
+- `cli-tools` and `editors`, curated from the packages the user actually chose.
+
+Everything else stays adopted and undeclared. This is a decision, not an
+oversight.
+
+## Never prune `stump`
+
+`dcli sync --prune` removes packages that are not declared, which on this host
+means the entire adopted baseline: `linux-cachyos`, every `cachyos-*` package,
+`nvidia-580xx-dkms`, and the desktop session.
+
+It is also impossible to review safely here. `stump` runs sequential module
+processing, and `dcli sync --dry-run` reports that dry run is not supported in
+sequential mode, so there is no way to preview the removals before applying
+them. The documented precondition for prune cannot be satisfied on this host.
+
+`auto_prune` is `false`, so this only matters when `--prune` is passed
+explicitly. Treat that flag as forbidden on `stump` until a future pass adopts
+the baseline into a managed module or sequential dry-run support lands.
 
 ## Deferral
 

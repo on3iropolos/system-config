@@ -1,0 +1,15 @@
+description: Command-line utilities adopted from the existing system
+
+# Deliberately curated from the ~171 packages that the CachyOS installer placed
+# on this machine. The OS baseline, hardware drivers, kernels, and fonts stay
+# unmanaged on purpose; see docs/hosts.md.
+packages:
+  - alacritty # GPU-accelerated terminal; `stump` still defaults to kitty.desktop
+  - btop # resource monitor
+  - duf # disk usage
+  - fastfetch # system summary, used by the shell greeting
+  - glances # system monitor
+  - ripgrep # recursive grep
+  - wget # pacman: wget | apt: wget
+  - rsync # pacman: rsync | apt: rsync
+  - plocate # pacman: plocate | apt: plocate

@@ -44,11 +44,23 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 - Re-adding `machine-serial` requires `gh`, `brave-browser`, and a separate
   `openssh-client` entry, plus restoring the package-level excludes on both
   hosts. See the deferral notes in `docs/hosts.md`.
+- Declared the packages the configuration actually depends on but left
+  unmanaged: `paru` and `cachyos-fish-config` in a new `cachyos` module,
+  `timeshift` in `base`, and hand-curated `cli-tools` and `editors` modules.
+- Recorded the adopted baseline policy for `stump` in `docs/hosts.md`, which
+  keeps the roughly 171 packages the CachyOS installer placed on this machine
+  deliberately undeclared instead of capturing them with `dcli merge`.
 
 ### Fixed
 
 - `docs/hosts.md` listed the module sets from before `git`, `ssh`, and `fish`
   were added, so the host reference had drifted from `hosts/*.yaml`.
+- Corrected the claim that `brave-bin` is an AUR package. It ships in the
+  `cachyos` repository, so nothing declared here depends on `paru` to resolve it.
+- `docs/operations.md` no longer advises `dcli sync --prune` on `stump`. The
+  documented precondition, reviewing removals first, cannot be met there because
+  sequential processing has no dry-run preview, and the removals would include
+  the kernel and GPU drivers.
 - Documented `paru`, `base-devel`, `git`, Flatpak, and Flathub prerequisites.
 - Corrected `noctalia-greeter` to the CachyOS repo package with greetd wiring notes.
 - Pinned `timeshift` as a CachyOS prerequisite so `system_backups` works on a bare base.

@@ -1,0 +1,7 @@
+description: CachyOS repository tooling and shell defaults
+
+# CachyOS-only package names. Scoped to `stump` so these never reach
+# `machine-serial` when that host is brought back.
+packages:
+  - paru # cachyos repo: AUR helper named by aur_helper on `stump`
+  - cachyos-fish-config # cachyos repo: sourced by ~/.config/fish/config.fish
