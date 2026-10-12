@@ -8,3 +8,8 @@ installed.yaml
 declared-packages.yaml
 # Machine-local notes and prompts. Never commit these.
 .local/
+# Private key material. Never commit these; each machine creates its own key
+# under ~/.ssh and only the public half is registered with GitHub.
+modules/*/dotfiles/**/id_*
+modules/*/dotfiles/**/*-ssh
+modules/*/dotfiles/**/*-ssh.pub

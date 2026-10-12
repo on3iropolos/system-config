@@ -7,6 +7,9 @@ import:
 # Ordered module list. Parallel processing (default), no AUR on Ubuntu.
 enabled_modules:
   - base
+  - git
+  - ssh
+  - fish
   - browser
   - security
   - dev

@@ -7,6 +7,9 @@ import:
 # Ordered module list. Sequential keeps installation order deterministic.
 enabled_modules:
   - base
+  - git
+  - ssh
+  - fish
   - browser
   - security
   - dev

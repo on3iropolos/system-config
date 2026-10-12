@@ -1,0 +1,4 @@
+description: fish login shell on both hosts
+
+packages:
+  - fish # apt: fish (universe) | pacman: fish (default CachyOS shell)

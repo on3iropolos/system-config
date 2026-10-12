@@ -10,6 +10,11 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 - Shared defaults in `hosts/shared/common.yaml`.
 - Seven minimal modules: `base`, `browser`, `security`, `dev`, `desktop-gnome`, `noctalia`, `cachyos-repo`.
 - Hook scripts for the CachyOS repo, Brave on apt, and the opencode fallback installer.
+- Three modules for the shared command-line identity: `git`, `ssh`, and `fish`.
+- Managed dotfiles for `~/.gitconfig`, `~/.ssh/config`, and the fish
+  `conf.d/ssh-agent.fish` agent fragment, identical on both hosts.
+- `openssh` and `fish` packages, with `openssh-client` noted for apt.
+- SSH identity section in the installation guide covering per-machine keys.
 - Documentation set under `docs/` covering installation, configuration, hosts, modules, and more.
 
 ### Changed
@@ -22,6 +27,13 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 - Variant package names resolve per host via dual entries plus `exclude:`.
 - Noctalia dotfiles ship valid v5 `config.toml` instead of the v4-style stub.
 - Both hosts enable only `NetworkManager` until later passes add providers.
+- `git`, `gh`, and `github-cli` moved out of `base` into the new `git` module so
+  each tool sits with the dotfile that configures it.
+- The ssh-agent bootstrap moved from a hand-edited `config.fish` into a managed
+  `conf.d` fragment, and now starts the agent with fish-native `string match`
+  capture instead of `eval`, which fish rejects during startup.
+- Installation guidance now clones over HTTPS first and switches the remote to
+  SSH after the first sync, instead of configuring SSH ad hoc.
 
 ### Fixed
 

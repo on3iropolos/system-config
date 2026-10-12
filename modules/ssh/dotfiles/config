@@ -1,0 +1,9 @@
+# GitHub access. Each machine keeps its own key pair at the path below; only
+# the public keys are registered on the account. Never commit key material.
+Host github.com
+    HostName github.com
+    IdentityFile ~/.ssh/on3iropolos-ssh
+    # Do not offer unrelated keys that happen to live in ~/.ssh.
+    IdentitiesOnly yes
+    # Cache the unlocked key for 4h so a passphrase is entered once per reboot.
+    AddKeysToAgent 4h

@@ -1,0 +1,4 @@
+description: OpenSSH client for the shared GitHub identity on both hosts
+
+packages:
+  - openssh # apt: openssh-client | pacman: openssh (server on CachyOS)

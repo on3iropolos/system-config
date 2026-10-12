@@ -1,0 +1,7 @@
+description: OpenSSH client configuration and GitHub identity on both hosts
+
+# Managed client configuration only. Key pairs are created manually on each
+# machine and are never committed; see docs/dotfiles.md.
+dotfiles:
+  - source: dotfiles/config
+    target: ~/.ssh/config

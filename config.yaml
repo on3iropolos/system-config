@@ -1,5 +1,4 @@
 # system-config pointer: selects the active host file.
 # Switch per machine: activate exactly one host line.
 # host: machine-serial # work laptop (Ubuntu, GNOME)
-host: machine-serial
-# host: stump # home laptop (CachyOS, Noctalia)
+host: stump # home laptop (CachyOS, Noctalia)

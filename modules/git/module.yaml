@@ -1,0 +1,8 @@
+description: Git identity and GitHub CLI on both hosts
+
+# Managed git identity. This file is symlinked to ~/.gitconfig, so a stray
+# `git config --global` writes straight into this repository's working tree.
+# Key material stays manual and is never committed; see docs/dotfiles.md.
+dotfiles:
+  - source: dotfiles/gitconfig
+    target: ~/.gitconfig

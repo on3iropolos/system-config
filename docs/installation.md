@@ -54,8 +54,9 @@ The script builds the release binary and installs to `/usr/local/bin/dcli`.
 
 Canonical checkout is `~/src/system-config` on every machine.
 `~/.config/arch-config` is a symlink for dcli, which hardcodes that path on all distros (Arch and Ubuntu alike).
-Clone the public repository over HTTPS; SSH is configured after system bootstrap,
-before the first push. Match the machine hostname, then verify.
+Clone the public repository over HTTPS, because the first checkout has no SSH
+key yet. The `ssh` module installs `~/.ssh/config` during the first sync, and
+the remote switches to SSH afterwards. Match the machine hostname, then verify.
 
 ```bash
 mkdir -p ~/src
@@ -83,6 +84,36 @@ do not exist until their provider packages have been installed.
 
 Replace `stump` with `machine-serial` on the work laptop.
 The Ubuntu work laptop follows the same `~/src` checkout plus symlink step; only `host: machine-serial` and the apt install method differ.
+
+## SSH identity
+
+The `ssh` module manages the client configuration only. Every machine creates
+its own key pair, so the hosts stay independently revocable and a compromised
+laptop does not expose the other. Register both public keys on the same GitHub
+account.
+
+Run on `machine-serial` and on `stump`:
+
+```bash
+ssh-keygen -t ed25519 -C on3iropolos@gmail.com -f ~/.ssh/on3iropolos-ssh
+chmod 600 ~/.ssh/on3iropolos-ssh
+ssh-add ~/.ssh/on3iropolos-ssh
+chsh -s "$(command -v fish)"
+```
+
+The `chmod` is not optional: OpenSSH refuses to load a private key that other
+users can read. Add `~/.ssh/on3iropolos-ssh.pub` under
+[GitHub SSH keys](https://github.com/settings/keys), then confirm and switch the
+remote from HTTPS to SSH.
+
+```bash
+ssh -T git@github.com
+git remote set-url origin git@github.com:on3iropolos/system-config.git
+git ls-remote origin
+```
+
+`ssh -T` must print `Hi on3iropolos!`. See [Dotfiles](dotfiles.md) for how the
+managed symlinks behave.
 
 ## Next steps
 

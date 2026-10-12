@@ -1,9 +1,6 @@
 description: Shared core tools enabled on both hosts
 
 packages:
-  - git # apt: git | pacman: git
-  - gh # apt: gh | pacman: n/a (excluded on stump, see github-cli)
-  - github-cli # pacman: github-cli (provides gh) | apt: n/a (excluded on machine-serial)
   - fzf # apt: fzf | pacman: fzf (dcli TUI dependency)
   - xdg-utils # apt: xdg-utils | pacman: xdg-utils (dcli default-apps dependency)
   - flatpak # apt: flatpak | pacman: flatpak (Bitwarden flatpak runtime)

@@ -1,0 +1,8 @@
+description: fish shell with the ssh-agent bootstrap on both hosts
+
+# Managed fragment, symlinked into fish's own auto-load directory so the shared
+# config stays separate from each machine's config.fish. The ssh key path is
+# owned by the ssh module; see docs/dotfiles.md.
+dotfiles:
+  - source: dotfiles/conf.d/ssh-agent.fish
+    target: ~/.config/fish/conf.d/ssh-agent.fish

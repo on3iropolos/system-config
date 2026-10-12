@@ -23,8 +23,8 @@ symlinked to it. Commit and push configuration changes separately through the
 
 | Host | Distro | Pkg manager | Modules enabled | Purpose |
 |---|---|---|---|---|
-| `machine-serial` | Ubuntu | apt | base, browser, security, dev, desktop-gnome | Work laptop, GNOME |
-| `stump` | CachyOS | pacman + paru | base, browser, security, dev, noctalia | Home laptop, Noctalia |
+| `machine-serial` | Ubuntu | apt | base, git, ssh, fish, browser, security, dev, desktop-gnome | Work laptop, GNOME |
+| `stump` | CachyOS | pacman + paru | base, git, ssh, fish, browser, security, dev, noctalia | Home laptop, Noctalia |
 
 Details: [docs/hosts.md](docs/hosts.md) and `hosts/machine-serial.yaml` plus `hosts/stump.yaml`.
 
@@ -32,7 +32,10 @@ Details: [docs/hosts.md](docs/hosts.md) and `hosts/machine-serial.yaml` plus `ho
 
 | Module | Description | Packages | Hooks | Dotfiles | Enabled on |
 |---|---|---|---|---|---|
-| base | Shared core tools | git, gh, github-cli, fzf, xdg-utils, flatpak | none | none | machine-serial, stump |
+| base | Shared core tools | fzf, xdg-utils, flatpak | none | none | machine-serial, stump |
+| git | Git identity and GitHub CLI | git, gh, github-cli | none | `~/.gitconfig` | machine-serial, stump |
+| ssh | OpenSSH client and GitHub identity | openssh | none | `~/.ssh/config` | machine-serial, stump |
+| fish | fish shell and ssh-agent bootstrap | fish | none | `~/.config/fish/conf.d/ssh-agent.fish` | machine-serial, stump |
 | browser | Brave browser | brave-bin, brave-browser | `install-brave-apt.sh` | none | machine-serial, stump |
 | security | Bitwarden password manager | flatpak:com.bitwarden.desktop | none | none | machine-serial, stump |
 | dev | opencode AI agent | opencode | `install-opencode.sh` | none | machine-serial, stump |
