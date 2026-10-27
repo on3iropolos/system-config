@@ -43,7 +43,7 @@ Details: [docs/hosts.md](docs/hosts.md) and `hosts/machine-serial.yaml` plus `ho
 | cli-tools | Command-line utilities | alacritty, btop, duf, fastfetch, glances, ripgrep, wget, rsync, plocate | none | none | machine-serial, stump |
 | editors | Text and GUI editors | nano, nano-syntax-highlighting, vim, vscodium | none | none | machine-serial, stump |
 | browser | Brave browser | brave-bin | `install-brave-apt.sh` | none | machine-serial, stump |
-| security | Bitwarden password manager | flatpak:com.bitwarden.desktop | none | none | machine-serial, stump |
+| security | Bitwarden password manager | bitwarden | none | none | machine-serial, stump |
 | dev | opencode AI agent | opencode | `install-opencode.sh` | none | machine-serial, stump |
 | desktop-gnome | Stock GNOME desktop | ubuntu-desktop-minimal | none | none | machine-serial |
 | noctalia | Noctalia + Umbriel + Greeter | noctalia, umbriel, noctalia-greeter | none | sync `dotfiles/` | stump |

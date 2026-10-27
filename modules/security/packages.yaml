@@ -1,5 +1,9 @@
 description: Bitwarden password manager on both hosts
 
 packages:
-  # Flatpak dodges the apt/pacman name divergence (apt manual install vs AUR bitwarden-bin).
-  - flatpak:com.bitwarden.desktop
+  # Arch extra; no AUR or Flatpak needed on stump.
+  # apt: n/a (manual .deb install on Ubuntu) | pacman: bitwarden.
+  - bitwarden # desktop vault (browser extension covers the rest)
+  - gnome-keyring # Secret Service provider (pacman: gnome-keyring | apt: gnome-keyring);
+    # satisfies the org.freedesktop.secrets provider non-interactively and backs
+    # Noctalia's encrypted storage (clipboard history, calendar credentials)

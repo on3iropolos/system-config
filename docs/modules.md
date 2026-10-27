@@ -14,7 +14,7 @@ Reference for all thirteen modules. Must stay in sync with `modules/*/module.yam
 | cli-tools | Command-line utilities | alacritty, btop, duf, fastfetch, glances, ripgrep, wget, rsync, plocate | none | none | machine-serial, stump |
 | editors | Text and GUI editors | nano, nano-syntax-highlighting, vim, vscodium | none | none | machine-serial, stump |
 | browser | Brave browser | brave-bin | `install-brave-apt.sh` | none | machine-serial, stump |
-| security | Bitwarden password manager | flatpak:com.bitwarden.desktop | none | none | machine-serial, stump |
+| security | Bitwarden password manager | bitwarden | none | none | machine-serial, stump |
 | dev | opencode AI agent | opencode | `install-opencode.sh` | none | machine-serial, stump |
 | desktop-gnome | Stock GNOME desktop | ubuntu-desktop-minimal | none | none | machine-serial |
 | noctalia | Noctalia + Umbriel + Greeter | alacritty, greetd, noctalia, umbriel, noctalia-greeter, python | `configure-greetd.sh` | sync `dotfiles/` | stump |
@@ -50,7 +50,9 @@ Reference for all thirteen modules. Must stay in sync with `modules/*/module.yam
   AUR package, so nothing in this repository depends on `paru` to resolve it.
   The apt name `brave-browser` is deferred with `machine-serial`.
 - `opencode` installs from Arch extra on CachyOS and is excluded on `machine-serial`.
-- Bitwarden uses `flatpak:com.bitwarden.desktop` to dodge the apt and pacman divergence.
+- Bitwarden uses the Arch extra `bitwarden` package (desktop) plus `gnome-keyring`
+  as Secret Service provider. Ubuntu has no apt equivalent, so `machine-serial`
+  needs a manual install.
 - `ubuntu-desktop-minimal` is a no-op on stock Ubuntu and is scoped to `machine-serial`.
 - `noctalia` ships in Arch extra, `noctalia-greeter` and `umbriel` in the CachyOS repos.
 - Umbriel autostarts Noctalia and owns the Noctalia IPC keybindings through the
