@@ -2,5 +2,31 @@
 # Synced from modules/noctalia/dotfiles/noctalia/ to ~/.config/noctalia/.
 # Noctalia merges every *.toml file here; GUI overrides land in ~/.local/state/noctalia/settings.toml.
 # Full reference: Noctalia configuration docs (docs.noctalia.dev/noctalia/configuration/).
+# Validate with: noctalia config validate
+
 [theme]
 mode = "dark"
+
+# Umbriel integration: type-to-launch and close-on-launch from the overview,
+# plus audio feed for Umbriel's audio-reactive effects.
+# https://docs.noctalia.dev/noctalia/compositor-settings/umbriel/
+[shell]
+umbriel_overview_type_to_launch_enabled = true
+
+# Launcher SSH provider: `/ssh` lists hosts, Enter opens alacritty.
+# https://docs.noctalia.dev/noctalia/configuration/shell/
+[shell.launcher.dmenu.entry.ssh]
+command = "awk '/^Host /{print $2}' ~/.ssh/config"
+exec = "alacritty -e ssh {selection}"
+prefix = "ssh"
+glyph = "server"
+global = false
+
+# Shared screenshot policy for region/fullscreen captures.
+[shell.screenshot]
+save_to_file = true
+copy_to_clipboard = true
+freeze_screen = true
+show_cursor = false
+annotate = false
+confirm_region = false

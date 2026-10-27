@@ -3,11 +3,14 @@ description: Noctalia shell plus Umbriel compositor and Greeter for the CachyOS 
 conflicts:
   - desktop-gnome
 
-# Sync Noctalia session config from dotfiles/ to ~/.config/.
+# Point greetd at the installed Noctalia Greeter session. The hook is
+# idempotent and runs as root each sync so the managed session stays current.
 dotfiles_sync: true
 dotfiles:
   - source: dotfiles/noctalia
     target: ~/.config/noctalia
+  - source: dotfiles/umbriel
+    target: ~/.config/umbriel
 
 # Point greetd at the installed Noctalia session wrapper. The hook is
 # idempotent and runs as root each sync so the managed session stays current.

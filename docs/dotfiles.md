@@ -20,25 +20,34 @@ sources are relative to the module root.
 
 ## Noctalia and Umbriel sync
 
-`modules/noctalia/module.yaml` sets `dotfiles_sync: true` with one explicit mapping.
+`modules/noctalia/module.yaml` sets `dotfiles_sync: true` with explicit mappings.
 
 ```yaml
 dotfiles_sync: true
 dotfiles:
   - source: dotfiles/noctalia
     target: ~/.config/noctalia
+  - source: dotfiles/umbriel
+    target: ~/.config/umbriel
 ```
 
 Source directory `modules/noctalia/dotfiles/noctalia/` syncs to `~/.config/noctalia/`.
 Noctalia v5 reads every `*.toml` file there, so the managed file is `config.toml`.
-GUI overrides live in `~/.local/state/noctalia/settings.toml` and always win.
+It pins dark mode, Umbriel overview type-to-launch, the `/ssh` launcher
+provider (alacritty), and screenshot policy. GUI overrides live in
+`~/.local/state/noctalia/settings.toml` and always win.
 See the [Noctalia configuration reference](https://docs.noctalia.dev/noctalia/configuration/) for all keys.
 
 `modules/noctalia/dotfiles/umbriel/config.toml` syncs to
-`~/.config/umbriel/config.toml`. It autostarts Noctalia and defines the standard
-Noctalia launcher, control-center, settings, window-switcher, audio, and
-brightness shortcuts. Its `eDP-1` output policy configures stump's internal
-3000x2000 panel at 1.5 scale.
+`~/.config/umbriel/config.toml`. It keeps the packaged Umbriel defaults
+adapted for alacritty (`Mod+Return`), plus the standard Noctalia launcher,
+control-center, settings, clipboard, session, window-switcher, screenshot,
+audio, and brightness shortcuts. `[keybinds]` replaces the built-in set, so
+every active bind is listed there; intentional deviations from upstream are
+commented at the top (`Mod+Comma` settings, `Mod+Space` launcher,
+`Mod+Escape` quit). Its `eDP-1` output policy configures stump's internal
+3000x2000 panel at 1.5 scale, with lid events, Noctalia blur/layer rules, and
+the overview hot corner.
 
 ## Git identity sync
 
