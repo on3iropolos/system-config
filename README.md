@@ -27,7 +27,7 @@ symlinked to it. Commit and push configuration changes separately through the
 | Host | Distro | Pkg manager | Modules enabled | Purpose |
 |---|---|---|---|---|
 | `machine-serial` | Ubuntu | apt | base, git, ssh, fish, browser, security, dev, desktop-gnome | Work laptop, GNOME |
-| `stump` | CachyOS | pacman + paru | base, git, ssh, fish, browser, security, dev, noctalia | Home laptop, Noctalia |
+| `stump` | CachyOS | pacman + paru | base, git, ssh, fish, browser, security, dev, media, noctalia | Home laptop, Noctalia |
 
 Details: [docs/hosts.md](docs/hosts.md) and `hosts/machine-serial.yaml` plus `hosts/stump.yaml`.
 
@@ -45,6 +45,7 @@ Details: [docs/hosts.md](docs/hosts.md) and `hosts/machine-serial.yaml` plus `ho
 | browser | Brave browser | brave-bin | `install-brave-apt.sh` | none | machine-serial, stump |
 | security | Bitwarden password manager | bitwarden | none | none | machine-serial, stump |
 | dev | opencode AI agent | opencode | `install-opencode.sh` | none | machine-serial, stump |
+| media | Stremio and Spotify streaming apps | flatpak:com.stremio.Stremio, flatpak:com.spotify.Client | none | none | stump |
 | desktop-gnome | Stock GNOME desktop | ubuntu-desktop-minimal | none | none | machine-serial |
 | noctalia | Noctalia + Umbriel + Greeter | noctalia, umbriel, noctalia-greeter | none | sync `dotfiles/` | stump |
 | cachyos-repo | CachyOS repo | cachyos-keyring, cachyos-mirrorlist | `add-cachyos-repo.sh` | none | not enabled |

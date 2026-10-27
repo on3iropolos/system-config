@@ -15,7 +15,7 @@ command -v paru
 
 ## Flatpak app fails
 
-The `security` module needs Flatpak plus the Flathub user remote.
+The `media` module needs Flatpak plus the Flathub user remote for the Stremio ref `com.stremio.Stremio` on `stump`.
 
 ```bash
 sudo pacman -S --needed flatpak

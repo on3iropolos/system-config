@@ -10,7 +10,7 @@ Reference for both host files. Must stay in sync with `hosts/*.yaml`.
 | Host | File | Distro | Manager | Processing | Modules |
 |---|---|---|---|---|---|
 | machine-serial | `hosts/machine-serial.yaml` | Ubuntu | apt | parallel | base, browser, security, dev, desktop-gnome |
-| stump | `hosts/stump.yaml` | CachyOS | pacman + paru | sequential | base, cachyos, git, ssh, fish, cli-tools, editors, browser, security, dev, noctalia |
+| stump | `hosts/stump.yaml` | CachyOS | pacman + paru | sequential | base, cachyos, git, ssh, fish, cli-tools, editors, browser, security, dev, media, noctalia |
 
 ## machine-serial
 
@@ -61,6 +61,7 @@ enabled_modules:
   - browser
   - security
   - dev
+  - media
   - noctalia
 packages: []
 exclude:

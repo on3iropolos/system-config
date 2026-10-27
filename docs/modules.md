@@ -1,6 +1,6 @@
 # Modules
 
-Reference for all thirteen modules. Must stay in sync with `modules/*/module.yaml` and `modules/*/packages.yaml`.
+Reference for all fourteen modules. Must stay in sync with `modules/*/module.yaml` and `modules/*/packages.yaml`.
 
 ## Modules
 
@@ -16,6 +16,7 @@ Reference for all thirteen modules. Must stay in sync with `modules/*/module.yam
 | browser | Brave browser | brave-bin | `install-brave-apt.sh` | none | machine-serial, stump |
 | security | Bitwarden password manager | bitwarden | none | none | machine-serial, stump |
 | dev | opencode AI agent | opencode | `install-opencode.sh` | none | machine-serial, stump |
+| media | Stremio and Spotify streaming apps | flatpak:com.stremio.Stremio, flatpak:com.spotify.Client | none | none | stump |
 | desktop-gnome | Stock GNOME desktop | ubuntu-desktop-minimal | none | none | machine-serial |
 | noctalia | Noctalia + Umbriel + Greeter | alacritty, greetd, noctalia, umbriel, noctalia-greeter, python | `configure-greetd.sh` | sync `dotfiles/` | stump |
 | cachyos-repo | CachyOS repo | cachyos-keyring, cachyos-mirrorlist | `add-cachyos-repo.sh` | none | not enabled |
@@ -53,6 +54,8 @@ Reference for all thirteen modules. Must stay in sync with `modules/*/module.yam
 - Bitwarden uses the Arch extra `bitwarden` package (desktop) plus `gnome-keyring`
   as Secret Service provider. Ubuntu has no apt equivalent, so `machine-serial`
   needs a manual install.
+- `media` declares `flatpak:com.stremio.Stremio` for Stremio, the Flathub flatpak ref, so no distro package name is needed. It is enabled on `stump` only for now.
+- `media` declares `flatpak:com.spotify.Client` for Spotify, the Flathub flatpak ref, so no distro package name is needed; it rides along with the Stremio entry.
 - `ubuntu-desktop-minimal` is a no-op on stock Ubuntu and is scoped to `machine-serial`.
 - `noctalia` ships in Arch extra, `noctalia-greeter` and `umbriel` in the CachyOS repos.
 - Umbriel autostarts Noctalia and owns the Noctalia IPC keybindings through the

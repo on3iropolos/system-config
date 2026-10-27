@@ -1,0 +1,9 @@
+description: Stremio media streamer on stump
+
+packages:
+  # Flatpak installs the Flathub build com.stremio.Stremio directly, dodging
+  # the apt/pacman divergence the distro packages would introduce.
+  - flatpak:com.stremio.Stremio
+  # Flatpak installs the Flathub build com.spotify.Client directly, dodging
+  # the apt/pacman divergence the distro packages would introduce.
+  - flatpak:com.spotify.Client

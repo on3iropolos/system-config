@@ -6,6 +6,8 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 
 ### Added
 
+- New `media` module declaring `flatpak:com.stremio.Stremio` for Stremio, enabled on `stump` while the rest of the streaming rollout settles.
+- New `media` module package entry declaring `flatpak:com.spotify.Client` for Spotify, the Flathub flatpak ref, alongside the Stremio entry.
 - Initial declarative layout with `config.yaml` pointer and `hosts/machine-serial.yaml` plus `hosts/stump.yaml`.
 - Shared defaults in `hosts/shared/common.yaml`.
 - Seven minimal modules: `base`, `browser`, `security`, `dev`, `desktop-gnome`, `noctalia`, `cachyos-repo`.
