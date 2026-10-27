@@ -17,7 +17,7 @@ Reference for all thirteen modules. Must stay in sync with `modules/*/module.yam
 | security | Bitwarden password manager | flatpak:com.bitwarden.desktop | none | none | machine-serial, stump |
 | dev | opencode AI agent | opencode | `install-opencode.sh` | none | machine-serial, stump |
 | desktop-gnome | Stock GNOME desktop | ubuntu-desktop-minimal | none | none | machine-serial |
-| noctalia | Noctalia + Umbriel + Greeter | kitty, greetd, noctalia, umbriel, noctalia-greeter, python | `configure-greetd.sh` | sync `dotfiles/` | stump |
+| noctalia | Noctalia + Umbriel + Greeter | alacritty, greetd, noctalia, umbriel, noctalia-greeter, python | `configure-greetd.sh` | sync `dotfiles/` | stump |
 | cachyos-repo | CachyOS repo | cachyos-keyring, cachyos-mirrorlist | `add-cachyos-repo.sh` | none | not enabled |
 
 ## Package name notes
@@ -44,7 +44,7 @@ Reference for all thirteen modules. Must stay in sync with `modules/*/module.yam
   unmanaged; see the adopted-baseline notes in [Hosts](hosts.md).
 - `vscodium` is declared by package name and provides both the `codium` and
   `vscodium` binaries.
-- `alacritty` is declared alongside `kitty`, which remains `stump`'s configured
+- `alacritty` is declared in `cli-tools` and `noctalia`, and is `stump`'s configured
   terminal in `default_apps`.
 - `brave-bin` installs on CachyOS from the `cachyos` repository. It is not an
   AUR package, so nothing in this repository depends on `paru` to resolve it.

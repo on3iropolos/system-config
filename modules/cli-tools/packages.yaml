@@ -4,7 +4,7 @@ description: Command-line utilities adopted from the existing system
 # on this machine. The OS baseline, hardware drivers, kernels, and fonts stay
 # unmanaged on purpose; see docs/hosts.md.
 packages:
-  - alacritty # GPU-accelerated terminal; `stump` still defaults to kitty.desktop
+  - alacritty # GPU-accelerated terminal; also the stump default (Mod+Return)
   - btop # resource monitor
   - duf # disk usage
   - fastfetch # system summary, used by the shell greeting

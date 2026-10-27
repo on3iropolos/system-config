@@ -1,7 +1,7 @@
 description: Noctalia shell plus Umbriel compositor and Greeter for the CachyOS home laptop
 
 packages:
-  - kitty # terminal available in the first Umbriel session
+  - alacritty # terminal available in the first Umbriel session (Mod+Return)
   - greetd # graphical login service, configured by this module's post-install hook
   - noctalia # pacman: noctalia (extra, v5 shell) | apt: n/a (home host only)
   - umbriel # pacman: umbriel (CachyOS repo) | apt: n/a (home host only)
