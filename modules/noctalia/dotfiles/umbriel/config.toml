@@ -32,8 +32,8 @@ focus_on_activate = false
 
 # Laptop lid: drop the internal panel from the desktop while closed.
 [events]
-lid_close = "umbriel msg output-disable:eDP-1"
-lid_open = "umbriel msg output-enable:eDP-1"
+lid_close = "umbriel msg output-disable eDP-1"
+lid_open = "umbriel msg output-enable eDP-1"
 
 # Internal laptop panel. Positions stay automatic because stump currently has
 # one display. Run `umbriel outputs` when adding a docked monitor.
@@ -75,8 +75,8 @@ default_extent_fraction = 0.5
 
 [keybinds]
 # --- Applications and session (alacritty is the stump terminal) ---
-"Mod+Return" = { action = "spawn:alacritty", repeat = false }
-"Mod" = "spawn:noctalia msg panel-toggle launcher"
+"Mod+Return" = { action = "spawn alacritty", repeat = false }
+"Mod" = "spawn noctalia msg panel-toggle launcher"
 "Mod+Q" = { action = "window-close", repeat = false }
 "Mod+Escape" = "session-quit"
 "Mod+Shift+Escape" = { action = "shortcuts-inhibit-toggle", allow_when_inhibited = true, repeat = false }
@@ -125,24 +125,24 @@ default_extent_fraction = 0.5
 "Mod+Shift+WheelDown" = "column-move-right"
 
 # --- Workspaces ---
-"Mod+1" = "workspace-switch:1"
-"Mod+2" = "workspace-switch:2"
-"Mod+3" = "workspace-switch:3"
-"Mod+4" = "workspace-switch:4"
-"Mod+5" = "workspace-switch:5"
-"Mod+6" = "workspace-switch:6"
-"Mod+7" = "workspace-switch:7"
-"Mod+8" = "workspace-switch:8"
-"Mod+9" = "workspace-switch:9"
-"Mod+Shift+1" = "window-move-to-workspace:1"
-"Mod+Shift+2" = "window-move-to-workspace:2"
-"Mod+Shift+3" = "window-move-to-workspace:3"
-"Mod+Shift+4" = "window-move-to-workspace:4"
-"Mod+Shift+5" = "window-move-to-workspace:5"
-"Mod+Shift+6" = "window-move-to-workspace:6"
-"Mod+Shift+7" = "window-move-to-workspace:7"
-"Mod+Shift+8" = "window-move-to-workspace:8"
-"Mod+Shift+9" = "window-move-to-workspace:9"
+"Mod+1" = "workspace-switch 1"
+"Mod+2" = "workspace-switch 2"
+"Mod+3" = "workspace-switch 3"
+"Mod+4" = "workspace-switch 4"
+"Mod+5" = "workspace-switch 5"
+"Mod+6" = "workspace-switch 6"
+"Mod+7" = "workspace-switch 7"
+"Mod+8" = "workspace-switch 8"
+"Mod+9" = "workspace-switch 9"
+"Mod+Shift+1" = "window-move-to-workspace 1"
+"Mod+Shift+2" = "window-move-to-workspace 2"
+"Mod+Shift+3" = "window-move-to-workspace 3"
+"Mod+Shift+4" = "window-move-to-workspace 4"
+"Mod+Shift+5" = "window-move-to-workspace 5"
+"Mod+Shift+6" = "window-move-to-workspace 6"
+"Mod+Shift+7" = "window-move-to-workspace 7"
+"Mod+Shift+8" = "window-move-to-workspace 8"
+"Mod+Shift+9" = "window-move-to-workspace 9"
 
 # --- Scratchpad (toggle remapped; see header) ---
 "Mod+Shift+Space" = { action = "window-move-to-scratchpad", repeat = false }
@@ -151,30 +151,30 @@ default_extent_fraction = 0.5
 "Mod+Tab" = "scratchpad-focus-next"
 
 # --- Noctalia shell controls ---
-"Mod+Space" = { action = "spawn:noctalia msg panel-toggle launcher", repeat = false }
-"Mod+V" = "spawn:noctalia msg panel-toggle clipboard"
-"Mod+S" = "spawn:noctalia msg panel-toggle control-center"
-"Mod+Comma" = "spawn:noctalia msg settings-toggle"
-"Mod+E" = "spawn:noctalia msg panel-toggle session"
-"Mod+Shift+W" = "spawn:noctalia msg panel-toggle wallpaper"
-"Alt+Tab" = "spawn:noctalia msg window-switcher hold"
-"Mod+Shift+A" = "spawn:noctalia msg screenshot-annotate"
-"Mod+Ctrl+A" = "spawn:noctalia msg annotate"
-"Mod+Shift+P" = "spawn:noctalia msg screenshot-region"
-"Mod+Shift+L" = "spawn:noctalia msg session lock"
-"Mod+Shift+C" = "spawn:noctalia msg caffeine-toggle"
-"Mod+Shift+N" = "spawn:noctalia msg nightlight-toggle"
-"Mod+Ctrl+M" = "spawn:noctalia msg mic-mute"
+"Mod+Space" = { action = "spawn noctalia msg panel-toggle launcher", repeat = false }
+"Mod+V" = "spawn noctalia msg panel-toggle clipboard"
+"Mod+S" = "spawn noctalia msg panel-toggle control-center"
+"Mod+Comma" = "spawn noctalia msg settings-toggle"
+"Mod+E" = "spawn noctalia msg panel-toggle session"
+"Mod+Shift+W" = "spawn noctalia msg panel-toggle wallpaper"
+"Alt+Tab" = "spawn noctalia msg window-switcher hold"
+"Mod+Shift+A" = "spawn noctalia msg screenshot-annotate"
+"Mod+Ctrl+A" = "spawn noctalia msg annotate"
+"Mod+Shift+P" = "spawn noctalia msg screenshot-region"
+"Mod+Shift+L" = "spawn noctalia msg session lock"
+"Mod+Shift+C" = "spawn noctalia msg caffeine-toggle"
+"Mod+Shift+N" = "spawn noctalia msg nightlight-toggle"
+"Mod+Ctrl+M" = "spawn noctalia msg mic-mute"
 
 # --- Media and brightness (lock-safe, routed via Noctalia OSD) ---
-"XF86AudioRaiseVolume" = { action = "spawn:noctalia msg volume-up", allow_when_locked = true }
-"XF86AudioLowerVolume" = { action = "spawn:noctalia msg volume-down", allow_when_locked = true }
-"XF86AudioMute" = { action = "spawn:noctalia msg volume-mute", allow_when_locked = true, repeat = false }
-"XF86AudioPlay" = { action = "spawn:noctalia msg media toggle", allow_when_locked = true, repeat = false }
-"XF86AudioNext" = { action = "spawn:noctalia msg media next", allow_when_locked = true }
-"XF86AudioPrev" = { action = "spawn:noctalia msg media previous", allow_when_locked = true }
-"XF86MonBrightnessUp" = { action = "spawn:noctalia msg brightness-up", allow_when_locked = true }
-"XF86MonBrightnessDown" = { action = "spawn:noctalia msg brightness-down", allow_when_locked = true }
+"XF86AudioRaiseVolume" = { action = "spawn noctalia msg volume-up", allow_when_locked = true }
+"XF86AudioLowerVolume" = { action = "spawn noctalia msg volume-down", allow_when_locked = true }
+"XF86AudioMute" = { action = "spawn noctalia msg volume-mute", allow_when_locked = true, repeat = false }
+"XF86AudioPlay" = { action = "spawn noctalia msg media toggle", allow_when_locked = true, repeat = false }
+"XF86AudioNext" = { action = "spawn noctalia msg media next", allow_when_locked = true }
+"XF86AudioPrev" = { action = "spawn noctalia msg media previous", allow_when_locked = true }
+"XF86MonBrightnessUp" = { action = "spawn noctalia msg brightness-up", allow_when_locked = true }
+"XF86MonBrightnessDown" = { action = "spawn noctalia msg brightness-down", allow_when_locked = true }
 
 # Blur windows using the non-optimized path so translucent windows include
 # overlapping windows behind them.
