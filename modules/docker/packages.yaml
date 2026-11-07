@@ -1,0 +1,4 @@
+description: Docker engine on both CachyOS hosts
+
+packages:
+  - docker # pacman: docker | apt: n/a (deferred, machine-serial dormant)

@@ -6,6 +6,10 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 
 ### Added
 
+- New `firewall` module declaring `ufw` with a default-deny policy plus SSH and `virbr0` rules, enabled on `stump` and `whimsyforge`.
+- New `docker` module declaring `docker` with the shared `/etc/docker/daemon.json`, enabled on `stump` and `whimsyforge`.
+- New `obsidian` module declaring `obsidian` with the managed vault pointer, enabled on `stump` and `whimsyforge`.
+- New `editors` post-install hook installing the shared VSCodium extension set (`ms-python.python`, `hashicorp.terraform`, `ms-azuretools.vscode-docker`).
 - New `whimsyforge` host for the home CachyOS GNOME desktop, sharing the `base`, `cachyos`, `git`, `ssh`, `fish`, `cli-tools`, `editors`, `browser`, `security`, `dev`, and `media` modules with `stump`.
 - New `gaming` module declaring `steam`, `gamemode`, `lib32-gamemode`, `mangohud`, `lib32-mangohud`, `gamescope`, and `goverlay`, enabled on `whimsyforge`.
 - New `media` module declaring `flatpak:com.stremio.Stremio` for Stremio, enabled on `stump` while the rest of the streaming rollout settles.
@@ -23,6 +27,10 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 
 ### Changed
 
+- `stump` and `whimsyforge` now also enable `firewall`, `docker`, and `obsidian`, and declare the `docker` and `ufw` services.
+- The AUR `spotify` package and the system-scope Spotify flatpak are removed; the declared user-scope flatpak is the only copy.
+- `bitwarden-cli` is removed; only the desktop vault stays declared.
+
 - The fish ssh-agent fragment now checks the running agent before adding the key, so the passphrase is requested once per login instead of on every shell start.
 - `noctalia` now installs Kitty and manages `greetd` with the
   `noctalia-greeter-session` wrapper for graphical login on `stump`.
@@ -32,7 +40,7 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 - Variant package names resolved per host via dual entries plus `exclude:`. The
   dual-entry pattern is now dormant with `machine-serial`.
 - Noctalia dotfiles ship valid v5 `config.toml` instead of the v4-style stub.
-- All hosts enable only `NetworkManager` until later passes add providers.
+- All hosts enable `NetworkManager`; the CachyOS hosts additionally enable their display manager plus `docker` and `ufw`.
 - `git`, `gh`, and `github-cli` moved out of `base` into the new `git` module so
   each tool sits with the dotfile that configures it.
 - The ssh-agent bootstrap moved from a hand-edited `config.fish` into a managed

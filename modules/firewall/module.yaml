@@ -1,0 +1,8 @@
+description: UFW firewall with SSH and libvirt rules on both CachyOS hosts
+
+# Applies the default-deny policy plus SSH and virbr0 rules, then enables the
+# firewall. Every `ufw` invocation is a no-op when already applied.
+# Behavior: always. Runs as root.
+post_install_hook: scripts/apply-ufw.sh
+post_hook_behavior: always
+run_hooks_as_user: false

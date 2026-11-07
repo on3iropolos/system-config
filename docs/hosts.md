@@ -10,8 +10,8 @@ Reference for all three host files. Must stay in sync with `hosts/*.yaml`.
 | Host | File | Distro | Manager | Processing | Modules |
 |---|---|---|---|---|---|
 | machine-serial | `hosts/machine-serial.yaml` | Ubuntu | apt | parallel | base, browser, security, dev, desktop-gnome |
-| stump | `hosts/stump.yaml` | CachyOS | pacman + paru | sequential | base, cachyos, git, ssh, fish, cli-tools, editors, browser, security, dev, media, noctalia |
-| whimsyforge | `hosts/whimsyforge.yaml` | CachyOS | pacman + paru | sequential | base, cachyos, git, ssh, fish, cli-tools, editors, browser, security, dev, media, desktop-gnome, gaming |
+| stump | `hosts/stump.yaml` | CachyOS | pacman + paru | sequential | base, cachyos, git, ssh, fish, cli-tools, editors, browser, security, dev, media, noctalia, firewall, docker, obsidian |
+| whimsyforge | `hosts/whimsyforge.yaml` | CachyOS | pacman + paru | sequential | base, cachyos, git, ssh, fish, cli-tools, editors, browser, security, dev, media, desktop-gnome, gaming, firewall, docker, obsidian |
 
 ## machine-serial
 
@@ -64,6 +64,9 @@ enabled_modules:
   - dev
   - media
   - noctalia
+  - firewall
+  - docker
+  - obsidian
 packages: []
 exclude:
   - desktop-gnome
@@ -103,6 +106,9 @@ enabled_modules:
   - media
   - desktop-gnome
   - gaming
+  - firewall
+  - docker
+  - obsidian
 packages: []
 exclude:
   - noctalia
@@ -110,7 +116,7 @@ exclude:
 
 Sets `aur_helper: paru`, `module_processing: sequential`, `flatpak_scope: user`,
 and `auto_prune: false`. The `desktop-gnome` module supplies `gnome-shell` and
-`gdm`, and the host service policy enables `gdm`. The `gaming` module supplies
+`gdm`, and the host service policy enables `gdm`, `docker`, and `ufw`. The `gaming` module supplies
 Steam plus gamemode, mangohud, gamescope, and goverlay. NVIDIA drivers and the
 32-bit driver stay adopted, not declared; multilib must be enabled for the
 `lib32-*` entries.
@@ -144,6 +150,21 @@ it or because it is a genuine choice rather than installer residue:
 
 Everything else stays adopted and undeclared. This is a decision, not an
 oversight.
+
+## Ansible remainder
+
+`whimsyforge` was previously managed by the `gnome-network-ansible` playbooks.
+The migrated pieces now live in the `firewall`, `docker`, `obsidian`, and
+`editors` modules plus the `docker` and `ufw` service entries.
+What stays adopted and out of dcli scope:
+
+- `ollama` and the `vm_host` libvirt stack: installed and running, undeclared.
+- The `k3d` dev-cluster and hindsight namespace: live state with no dcli
+  primitive; the ansible repo remains its reference.
+- The `sshd` server: enabled with its hardened config, but only the client
+  side is managed (see the `ssh` module). Server config stays manual.
+- One-time provisioning: user account, sudoers, `~/projects` clones, group
+  memberships (including the `docker` group), and the GCR ssh-agent env file.
 
 ## Never prune CachyOS hosts
 

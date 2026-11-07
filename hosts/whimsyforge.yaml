@@ -19,6 +19,9 @@ enabled_modules:
   - media
   - desktop-gnome
   - gaming
+  - firewall
+  - docker
+  - obsidian
 
 # All packages live in modules. Keep this empty.
 packages: []
@@ -34,6 +37,8 @@ services:
   enabled:
     - NetworkManager
     - gdm
+    - docker
+    - ufw
   disabled: []
 
 default_apps:

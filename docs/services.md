@@ -6,7 +6,11 @@ Minimal service and default-app policy for all hosts.
 
 All hosts enable `NetworkManager`, which the distro installers provide.
 `stump` also enables `greetd`, supplied by the Noctalia module.
-`whimsyforge` also enables `gdm`, supplied by the `desktop-gnome` module. Add services
+`whimsyforge` also enables `gdm`, supplied by the `desktop-gnome` module.
+Both CachyOS hosts also enable `docker` and `ufw`, supplied by the `docker`
+and `firewall` modules. The `sshd` server stays enabled from the previous
+Ansible provisioning but is undeclared: only the client side is managed, so
+server config and service state stay manual. Add services
 only with a package that provides them.
 
 ```yaml
@@ -15,6 +19,8 @@ services:
     - NetworkManager
     - greetd # stump only
     - gdm # whimsyforge only
+    - docker # CachyOS hosts only
+    - ufw # CachyOS hosts only
   disabled: []
 ```
 

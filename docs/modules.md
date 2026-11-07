@@ -1,6 +1,6 @@
 # Modules
 
-Reference for all fifteen modules. Must stay in sync with `modules/*/module.yaml` and `modules/*/packages.yaml`.
+Reference for all eighteen modules. Must stay in sync with `modules/*/module.yaml` and `modules/*/packages.yaml`.
 
 ## Modules
 
@@ -12,13 +12,16 @@ Reference for all fifteen modules. Must stay in sync with `modules/*/module.yaml
 | ssh | OpenSSH client and GitHub identity | openssh | none | `~/.ssh/config` | machine-serial, stump, whimsyforge |
 | fish | fish shell and ssh-agent bootstrap | fish | none | `~/.config/fish/conf.d/ssh-agent.fish` | machine-serial, stump, whimsyforge |
 | cli-tools | Command-line utilities | alacritty, btop, duf, fastfetch, glances, ripgrep, wget, rsync, plocate | none | none | machine-serial, stump, whimsyforge |
-| editors | Text and GUI editors | nano, nano-syntax-highlighting, vim, vscodium | none | none | machine-serial, stump, whimsyforge |
+| editors | Text and GUI editors | nano, nano-syntax-highlighting, vim, vscodium | `install-extensions.sh` | none | machine-serial, stump, whimsyforge |
 | browser | Brave browser | brave-bin | `install-brave-apt.sh` | none | machine-serial, stump, whimsyforge |
 | security | Bitwarden password manager | bitwarden | none | none | machine-serial, stump, whimsyforge |
 | dev | opencode AI agent | opencode | `install-opencode.sh` | none | machine-serial, stump, whimsyforge |
 | media | Stremio and Spotify streaming apps | flatpak:com.stremio.Stremio, flatpak:com.spotify.Client | none | none | stump, whimsyforge |
 | desktop-gnome | GNOME desktop | gnome-shell, gdm | none | none | whimsyforge (machine-serial deferred) |
 | gaming | Steam gaming tools | steam, gamemode, lib32-gamemode, mangohud, lib32-mangohud, gamescope, goverlay | none | none | whimsyforge |
+| firewall | UFW firewall with SSH and libvirt rules | ufw | `apply-ufw.sh` | none | stump, whimsyforge |
+| docker | Docker engine with shared daemon config | docker | `configure-daemon.sh` | none | stump, whimsyforge |
+| obsidian | Obsidian notes with shared vault pointer | obsidian | none | `~/.config/obsidian/obsidian.json` | stump, whimsyforge |
 | noctalia | Noctalia + Umbriel + Greeter | alacritty, greetd, noctalia, umbriel, noctalia-greeter, python | `configure-greetd.sh` | sync `dotfiles/` | stump |
 | cachyos-repo | CachyOS repo | cachyos-keyring, cachyos-mirrorlist | `add-cachyos-repo.sh` | none | not enabled |
 
@@ -63,6 +66,18 @@ Reference for all fifteen modules. Must stay in sync with `modules/*/module.yaml
 - `gaming` declares Steam plus gamemode, mangohud, gamescope, and goverlay on
   `whimsyforge` only. Multilib must be enabled for the `lib32-*` entries, and
   the NVIDIA drivers stay adopted rather than declared.
+- `ufw` is declared in `firewall` with the default-deny policy plus SSH and
+  `virbr0` rules; the hook enables the firewall, so the rules apply on both
+  CachyOS hosts even though only `whimsyforge` runs libvirt guests.
+- `docker` is declared with the shared `/etc/docker/daemon.json`
+  (172.31.0.0/16 pool, live-restore, no userland-proxy). Daemon changes need a
+  manual `systemctl restart docker`; group membership stays manual and adopted.
+- `obsidian` declares the package plus the managed vault pointer at
+  `~/.config/obsidian/obsidian.json`. The `~/notes` directory itself stays
+  manual; create it on hosts that lack it.
+- The `editors` hook installs the shared VSCodium set (`ms-python.python`,
+  `hashicorp.terraform`, `ms-azuretools.vscode-docker`). It only adds;
+  unwanted extensions stay a manual `codium --uninstall-extension`.
 - `noctalia` ships in Arch extra, `noctalia-greeter` and `umbriel` in the CachyOS repos.
 - Umbriel autostarts Noctalia and owns the Noctalia IPC keybindings through the
   Noctalia module's managed Umbriel dotfile.
@@ -77,8 +92,11 @@ are set in each `module.yaml`.
 
 - `install-brave-apt.sh` runs as the browser pre-install hook, once, as root.
 - `install-timeshift.sh` runs as the base pre-install hook, once, as root.
+- `apply-ufw.sh` runs as the firewall post-install hook, always, as root.
+- `configure-daemon.sh` runs as the docker post-install hook, always, as root.
 - `install-opencode.sh` runs as the dev post-install hook, on ask, as the user.
 - `add-cachyos-repo.sh` runs as the cachyos-repo pre-install hook, once, as root.
+- `install-extensions.sh` runs as the editors post-install hook, on ask, as the user.
 - `configure-greetd.sh` runs as the noctalia post-install hook, always, as root.
 
 ## Dotfile notes

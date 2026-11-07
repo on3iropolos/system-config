@@ -1,1 +1,7 @@
 description: Text and GUI editors on both hosts
+
+# Installs the shared VSCodium extension set. `codium --install-extension`
+# skips extensions that are already present. Behavior: ask. Runs as the user.
+post_install_hook: scripts/install-extensions.sh
+post_hook_behavior: ask
+run_hooks_as_user: true

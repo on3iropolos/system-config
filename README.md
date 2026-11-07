@@ -28,8 +28,8 @@ symlinked to it. Commit and push configuration changes separately through the
 | Host | Distro | Pkg manager | Modules enabled | Purpose |
 |---|---|---|---|---|
 | `machine-serial` | Ubuntu | apt | base, git, ssh, fish, browser, security, dev, desktop-gnome | Work laptop, GNOME |
-| `stump` | CachyOS | pacman + paru | base, git, ssh, fish, browser, security, dev, media, noctalia | Home laptop, Noctalia |
-| `whimsyforge` | CachyOS | pacman + paru | base, git, ssh, fish, browser, security, dev, media, desktop-gnome, gaming | Home desktop, GNOME |
+| `stump` | CachyOS | pacman + paru | base, git, ssh, fish, browser, security, dev, media, noctalia, firewall, docker, obsidian | Home laptop, Noctalia |
+| `whimsyforge` | CachyOS | pacman + paru | base, git, ssh, fish, browser, security, dev, media, desktop-gnome, gaming, firewall, docker, obsidian | Home desktop, GNOME |
 
 Details: [docs/hosts.md](docs/hosts.md) and `hosts/machine-serial.yaml`, `hosts/stump.yaml`, plus `hosts/whimsyforge.yaml`.
 
@@ -43,13 +43,16 @@ Details: [docs/hosts.md](docs/hosts.md) and `hosts/machine-serial.yaml`, `hosts/
 | ssh | OpenSSH client and GitHub identity | openssh | none | `~/.ssh/config` | machine-serial, stump, whimsyforge |
 | fish | fish shell and ssh-agent bootstrap | fish | none | `~/.config/fish/conf.d/ssh-agent.fish` | machine-serial, stump, whimsyforge |
 | cli-tools | Command-line utilities | alacritty, btop, duf, fastfetch, glances, ripgrep, wget, rsync, plocate | none | none | machine-serial, stump, whimsyforge |
-| editors | Text and GUI editors | nano, nano-syntax-highlighting, vim, vscodium | none | none | machine-serial, stump, whimsyforge |
+| editors | Text and GUI editors | nano, nano-syntax-highlighting, vim, vscodium | `install-extensions.sh` | none | machine-serial, stump, whimsyforge |
 | browser | Brave browser | brave-bin | `install-brave-apt.sh` | none | machine-serial, stump, whimsyforge |
 | security | Bitwarden password manager | bitwarden | none | none | machine-serial, stump, whimsyforge |
 | dev | opencode AI agent | opencode | `install-opencode.sh` | none | machine-serial, stump, whimsyforge |
 | media | Stremio and Spotify streaming apps | flatpak:com.stremio.Stremio, flatpak:com.spotify.Client | none | none | stump, whimsyforge |
 | desktop-gnome | GNOME desktop | gnome-shell, gdm | none | none | whimsyforge (machine-serial deferred) |
 | gaming | Steam gaming tools | steam, gamemode, lib32-gamemode, mangohud, lib32-mangohud, gamescope, goverlay | none | none | whimsyforge |
+| firewall | UFW firewall with SSH and libvirt rules | ufw | `apply-ufw.sh` | none | stump, whimsyforge |
+| docker | Docker engine with shared daemon config | docker | `configure-daemon.sh` | none | stump, whimsyforge |
+| obsidian | Obsidian notes with shared vault pointer | obsidian | none | `~/.config/obsidian/obsidian.json` | stump, whimsyforge |
 | noctalia | Noctalia + Umbriel + Greeter | noctalia, umbriel, noctalia-greeter | none | sync `dotfiles/` | stump |
 | cachyos-repo | CachyOS repo | cachyos-keyring, cachyos-mirrorlist | `add-cachyos-repo.sh` | none | not enabled |
 

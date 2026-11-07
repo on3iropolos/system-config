@@ -1,0 +1,7 @@
+description: Obsidian notes with the shared vault pointer on both CachyOS hosts
+
+# Managed vault pointer. The notes directory itself stays manual; see
+# docs/dotfiles.md.
+dotfiles:
+  - source: dotfiles/obsidian.json
+    target: ~/.config/obsidian/obsidian.json

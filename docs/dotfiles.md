@@ -1,7 +1,8 @@
 # Dotfiles
 
-Four modules manage dotfiles: `noctalia` for the desktop shell, and `git`, `ssh`,
-and `fish` for the shared command-line identity and login shell.
+Five modules manage dotfiles: `noctalia` for the desktop shell, `obsidian` for
+the notes vault pointer, and `git`, `ssh`, and `fish` for the shared
+command-line identity and login shell.
 
 ## How syncing works
 
@@ -48,6 +49,13 @@ commented at the top (`Mod+Comma` settings, `Mod+Space` launcher,
 `Mod+Escape` quit). Its `eDP-1` output policy configures stump's internal
 3000x2000 panel at 1.5 scale, with lid events, Noctalia blur/layer rules, and
 the overview hot corner.
+
+## Obsidian vault sync
+
+`modules/obsidian/dotfiles/obsidian.json` symlinks to
+`~/.config/obsidian/obsidian.json` on both CachyOS hosts and points Obsidian at
+the shared vault in `~/notes`. The notes directory itself is not managed;
+create it with `mkdir ~/notes` on hosts that lack it.
 
 ## Git identity sync
 

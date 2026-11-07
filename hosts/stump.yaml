@@ -18,6 +18,9 @@ enabled_modules:
   - dev
   - media
   - noctalia
+  - firewall
+  - docker
+  - obsidian
 
 # All packages live in modules. Keep this empty.
 packages: []
@@ -33,6 +36,8 @@ services:
   enabled:
     - NetworkManager
     - greetd
+    - docker
+    - ufw
   disabled: []
 
 default_apps:
