@@ -4,7 +4,7 @@ How-to for common failures in this repository.
 
 ## AUR helper missing on CachyOS
 
-CachyOS no longer preinstalls `paru`, but `stump` declares it because
+CachyOS no longer preinstalls `paru`, but the CachyOS hosts declare it because
 `aur_helper` names it. No package in this repository is AUR-backed, so a missing
 `paru` affects manual installs only, never `dcli sync`.
 
@@ -15,7 +15,7 @@ command -v paru
 
 ## Flatpak app fails
 
-The `media` module needs Flatpak plus the Flathub user remote for the Stremio ref `com.stremio.Stremio` on `stump`.
+The `media` module needs Flatpak plus the Flathub user remote for the Stremio ref `com.stremio.Stremio` on the CachyOS hosts.
 
 ```bash
 sudo pacman -S --needed flatpak
@@ -41,8 +41,9 @@ Package names used to resolve per host by declaring both variants and dropping
 the inapplicable one through the host `exclude:` list. That mechanism is
 unreliable during sync: dcli applies `exclude:` when counting declared packages
 but still attempts the excluded names during install. The modules therefore
-declare only CachyOS-resolvable names, `github-cli` and `brave-bin`, and the
-apt names `gh` and `brave-browser` are deferred with `machine-serial`.
+declare only CachyOS-resolvable names, `github-cli`, `brave-bin`, `gnome-shell`,
+and `gdm`, and the
+apt names `gh`, `brave-browser`, and `ubuntu-desktop-minimal` are deferred with `machine-serial`.
 
 If a sync attempts a package that the host does not have, check whether the
 module still declares it before suspecting the package manager.
@@ -57,7 +58,7 @@ dcli sync
 dcli validate
 ```
 
-For `stump`, confirm the expected Brave desktop-file ID after sync:
+For `stump` and `whimsyforge`, confirm the expected Brave desktop-file ID after sync:
 
 ```bash
 pacman -Ql brave-bin | grep '/usr/share/applications/.*\.desktop$'
@@ -106,4 +107,18 @@ See [docs/dotfiles.md](dotfiles.md) for the sync layout.
 ```bash
 sudo pacman -S fzf timeshift
 sudo apt install -y fzf timeshift
+```
+
+## dcli validates the wrong config
+
+`dcli validate` fails with `dcli config directory not found`, or it reports a
+host named after the FQDN with almost nothing enabled. This repository is the
+config: dcli must read it through the `~/.config/arch-config` symlink, not a
+fresh `~/.config/dcli` scaffold. Do not run `dcli init` here; if one already
+exists, move it aside so the symlink target is used instead.
+
+```bash
+ls -l ~/.config/arch-config
+mv ~/.config/dcli /tmp/dcli-scaffold-backup
+dcli validate
 ```

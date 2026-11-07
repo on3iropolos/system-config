@@ -6,6 +6,8 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 
 ### Added
 
+- New `whimsyforge` host for the home CachyOS GNOME desktop, sharing the `base`, `cachyos`, `git`, `ssh`, `fish`, `cli-tools`, `editors`, `browser`, `security`, `dev`, and `media` modules with `stump`.
+- New `gaming` module declaring `steam`, `gamemode`, `lib32-gamemode`, `mangohud`, `lib32-mangohud`, `gamescope`, and `goverlay`, enabled on `whimsyforge`.
 - New `media` module declaring `flatpak:com.stremio.Stremio` for Stremio, enabled on `stump` while the rest of the streaming rollout settles.
 - New `media` module package entry declaring `flatpak:com.spotify.Client` for Spotify, the Flathub flatpak ref, alongside the Stremio entry.
 - Initial declarative layout with `config.yaml` pointer and `hosts/machine-serial.yaml` plus `hosts/stump.yaml`.
@@ -14,7 +16,7 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 - Hook scripts for the CachyOS repo, Brave on apt, and the opencode fallback installer.
 - Three modules for the shared command-line identity: `git`, `ssh`, and `fish`.
 - Managed dotfiles for `~/.gitconfig`, `~/.ssh/config`, and the fish
-  `conf.d/ssh-agent.fish` agent fragment, identical on both hosts.
+  `conf.d/ssh-agent.fish` agent fragment, identical on all hosts.
 - `openssh` and `fish` packages, with `openssh-client` noted for apt.
 - SSH identity section in the installation guide covering per-machine keys.
 - Documentation set under `docs/` covering installation, configuration, hosts, modules, and more.
@@ -30,7 +32,7 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 - Variant package names resolved per host via dual entries plus `exclude:`. The
   dual-entry pattern is now dormant with `machine-serial`.
 - Noctalia dotfiles ship valid v5 `config.toml` instead of the v4-style stub.
-- Both hosts enable only `NetworkManager` until later passes add providers.
+- All hosts enable only `NetworkManager` until later passes add providers.
 - `git`, `gh`, and `github-cli` moved out of `base` into the new `git` module so
   each tool sits with the dotfile that configures it.
 - The ssh-agent bootstrap moved from a hand-edited `config.fish` into a managed
@@ -40,18 +42,19 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
   SSH after the first sync, instead of configuring SSH ad hoc.
 - `state/` is now ignored via `state/*` with `state/.gitignore` re-included, so
   the tracked marker file dcli validate expects can actually be committed.
-- `machine-serial` is deferred so `stump` can be stabilised first. The `git` and
-  `browser` modules now declare only CachyOS-resolvable package names, which
+- `machine-serial` is deferred so the CachyOS hosts can be stabilised first. The `git`,
+  `browser`, and `desktop-gnome` modules now declare only CachyOS-resolvable package names, which
   removes the per-sync `gh` install failure caused by the upstream defect
   recorded in `.local/dcli-bugs.md`.
-- Re-adding `machine-serial` requires `gh`, `brave-browser`, and a separate
-  `openssh-client` entry, plus restoring the package-level excludes on both
+- Re-adding `machine-serial` requires `gh`, `brave-browser`, `ubuntu-desktop-minimal`,
+  and a separate `openssh-client` entry, plus restoring the package-level excludes on all
   hosts. See the deferral notes in `docs/hosts.md`.
+- `config.yaml` now points at `whimsyforge`. Pulling this on `stump` requires switching back to `host: stump` before the next sync.
 - Declared the packages the configuration actually depends on but left
   unmanaged: `paru` and `cachyos-fish-config` in a new `cachyos` module,
   `timeshift` in `base`, and hand-curated `cli-tools` and `editors` modules.
-- Recorded the adopted baseline policy for `stump` in `docs/hosts.md`, which
-  keeps the roughly 171 packages the CachyOS installer placed on this machine
+- Recorded the adopted baseline policy for the CachyOS hosts in `docs/hosts.md`, which
+  keeps the roughly 171 packages the CachyOS installer placed on `stump`
   deliberately undeclared instead of capturing them with `dcli merge`.
 - Added a `base` pre-install hook that writes `/etc/timeshift/timeshift.json`,
   enabling btrfs-mode snapshots that include `/home`. Without it, timeshift runs
@@ -65,7 +68,7 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
   were added, so the host reference had drifted from `hosts/*.yaml`.
 - Corrected the claim that `brave-bin` is an AUR package. It ships in the
   `cachyos` repository, so nothing declared here depends on `paru` to resolve it.
-- `docs/operations.md` no longer advises `dcli sync --prune` on `stump`. The
+- `docs/operations.md` no longer advises `dcli sync --prune` on the CachyOS hosts. The
   documented precondition, reviewing removals first, cannot be met there because
   sequential processing has no dry-run preview, and the removals would include
   the kernel and GPU drivers.
@@ -78,7 +81,7 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 - Pinned `timeshift` as a CachyOS prerequisite so `system_backups` works on a bare base.
 - Canonical checkout is now `~/src/system-config` with `~/.config/arch-config` as a symlink; remote is `git@github.com:on3iropolos/system-config.git` on `main`.
 - Clarified plain `git` versus `dcli repo` workflow in `docs/operations.md`.
-- Clarified dcli hardcodes `~/.config/arch-config` on Arch and Ubuntu alike; `~/src` plus symlink applies to both hosts.
+- Clarified dcli hardcodes `~/.config/arch-config` on Arch and Ubuntu alike; `~/src` plus symlink applies to all hosts.
 - Ignored machine-local `.local/` notes and prompts; scoped the no-bare-URL rule to prose so fenced commands keep raw URLs.
 - Corrected `umbriel-git` (AUR placeholder) to `umbriel` from the CachyOS repos per [CachyOS-PKGBUILDS#1925](https://github.com/CachyOS/CachyOS-PKGBUILDS/issues/1925); `paru` stays required for AUR-only `brave-bin`.
 - Added CachyOS installer preferences for `stump` (erase disk, `btrfs`, encryption on, `Limine`, minimal base, `linux-cachyos`, hostname `stump`) with normative CachyOS wiki links; post-OS scope unchanged.

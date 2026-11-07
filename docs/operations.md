@@ -15,7 +15,7 @@ Use this sequence for a blank system. The initial sync installs the packages
 that provide configured default-application desktop files, so validation belongs
 after the system has converged.
 
-`stump` uses sequential module processing. dcli does not currently provide a
+`stump` and `whimsyforge` use sequential module processing. dcli does not currently provide a
 complete package preview for sequential `dcli sync --dry-run`; review
 `dcli status` before running the initial sync instead.
 
@@ -31,7 +31,8 @@ dcli merge
 ```
 
 Neither host currently uses this. `stump` carries an adopted baseline of roughly
-171 unmanaged packages from the CachyOS installer, and declaring them wholesale
+171 unmanaged packages from the CachyOS installer, and `whimsyforge` carries its
+own uncounted baseline. Declaring them wholesale
 would tie the configuration to one distro release and one machine's hardware.
 The small subset the configuration actually depends on is declared by hand in
 the `cachyos`, `base`, `cli-tools`, and `editors` modules. See the
@@ -53,10 +54,10 @@ dcli sync
 dcli status
 ```
 
-Do not run `dcli sync --prune` on `stump`. That host runs sequential module
+Do not run `dcli sync --prune` on `stump` or `whimsyforge`. Those hosts run sequential module
 processing, so `dcli sync --dry-run` cannot preview what would be removed, and
 the removals would include the adopted baseline, the kernel, and the GPU
-drivers. See [never prune stump](hosts.md#never-prune-stump).
+drivers. See [never prune CachyOS hosts](hosts.md#never-prune-cachyos-hosts).
 
 ## Modules
 
@@ -82,7 +83,7 @@ dcli repo pull
 dcli repo status
 ```
 
-## Two-machine flow
+## Three-machine flow
 
 ```bash
 dcli merge --dry-run

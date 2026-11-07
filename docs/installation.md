@@ -3,7 +3,7 @@
 Tutorial for installing dcli and pulling this repository.
 Follow the [dcli installation guide](https://gitlab.com/theblackdon/dcli#installation) as normative.
 
-## CachyOS (stump)
+## CachyOS (stump, whimsyforge)
 
 ### Installer preferences
 
@@ -16,8 +16,14 @@ Our preferences for `stump`:
 - Kernel `linux-cachyos` default, drivers via automatic detection (proprietary NVIDIA only if applicable).
 - User `on3i`, hostname `stump` set in the installer (`hostnamectl` below is a fallback).
 
+Our preferences for `whimsyforge` match `stump` except for the desktop: GNOME
+instead of Noctalia plus Umbriel plus Greeter. It is an existing system, so
+there is no fresh-install path; enable multilib in `/etc/pacman.conf` for the
+`gaming` module `lib32-*` entries and confirm the 32-bit NVIDIA driver is
+present.
+
 Install build tools, an AUR helper, and Flatpak first.
-CachyOS no longer preinstalls `paru`, which stays declared on `stump` because
+CachyOS no longer preinstalls `paru`, which stays declared on the CachyOS hosts because
 `aur_helper` names it.
 
 ```bash
@@ -75,7 +81,7 @@ sudo hostnamectl set-hostname stump
 hostname
 ```
 
-Set `host: stump` in `~/src/system-config/config.yaml`, then bootstrap the
+Set `host: whimsyforge` in `~/src/system-config/config.yaml`, then bootstrap the
 machine:
 
 ```bash
@@ -89,17 +95,17 @@ The first sync installs declared packages before configuring default
 applications. Run validation afterward because the configured desktop-file IDs
 do not exist until their provider packages have been installed.
 
-Replace `stump` with `machine-serial` on the work laptop.
+Replace `whimsyforge` with `stump` or `machine-serial` on the other machines.
 The Ubuntu work laptop follows the same `~/src` checkout plus symlink step; only `host: machine-serial` and the apt install method differ.
 
 ## SSH identity
 
 The `ssh` module manages the client configuration only. Every machine creates
 its own key pair, so the hosts stay independently revocable and a compromised
-laptop does not expose the other. Register both public keys on the same GitHub
+machine does not expose the others. Register all public keys on the same GitHub
 account.
 
-Run on `machine-serial` and on `stump`:
+Run on `machine-serial`, `stump`, and `whimsyforge`:
 
 ```bash
 ssh-keygen -t ed25519 -C on3iropolos@gmail.com -f ~/.ssh/on3iropolos-ssh
@@ -129,3 +135,5 @@ managed symlinks behave.
 - After the initial `stump` sync, reboot to start the configured Noctalia Greeter.
   Keep a TTY available for recovery; see [docs/services.md](services.md) and
   the [Noctalia greeter installation](https://docs.noctalia.dev/greeter/installation/).
+- After the initial `whimsyforge` sync, reboot to start the `gdm` GNOME login
+  screen.

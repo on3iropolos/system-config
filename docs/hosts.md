@@ -1,8 +1,8 @@
 # Hosts
 
-Reference for both host files. Must stay in sync with `hosts/*.yaml`.
+Reference for all three host files. Must stay in sync with `hosts/*.yaml`.
 
-`stump` is the only host currently deployed. `machine-serial` is dormant; see
+`stump` and `whimsyforge` are the deployed hosts. `machine-serial` is dormant; see
 [Deferral](#deferral) below.
 
 ## Hosts
@@ -11,6 +11,7 @@ Reference for both host files. Must stay in sync with `hosts/*.yaml`.
 |---|---|---|---|---|---|
 | machine-serial | `hosts/machine-serial.yaml` | Ubuntu | apt | parallel | base, browser, security, dev, desktop-gnome |
 | stump | `hosts/stump.yaml` | CachyOS | pacman + paru | sequential | base, cachyos, git, ssh, fish, cli-tools, editors, browser, security, dev, media, noctalia |
+| whimsyforge | `hosts/whimsyforge.yaml` | CachyOS | pacman + paru | sequential | base, cachyos, git, ssh, fish, cli-tools, editors, browser, security, dev, media, desktop-gnome, gaming |
 
 ## machine-serial
 
@@ -79,17 +80,58 @@ package-level exclusions because the shared modules declare only names that
 resolve on CachyOS. The key is retained: it still applies on the dcli
 declaration path, and it is needed again once machine-serial returns.
 
+## whimsyforge
+
+Home desktop on CachyOS with stock GNOME.
+
+```yaml
+host: whimsyforge
+description: Home desktop on CachyOS with stock GNOME
+import:
+  - hosts/shared/common.yaml
+enabled_modules:
+  - base
+  - cachyos
+  - git
+  - ssh
+  - fish
+  - cli-tools
+  - editors
+  - browser
+  - security
+  - dev
+  - media
+  - desktop-gnome
+  - gaming
+packages: []
+exclude:
+  - noctalia
+```
+
+Sets `aur_helper: paru`, `module_processing: sequential`, `flatpak_scope: user`,
+and `auto_prune: false`. The `desktop-gnome` module supplies `gnome-shell` and
+`gdm`, and the host service policy enables `gdm`. The `gaming` module supplies
+Steam plus gamemode, mangohud, gamescope, and goverlay. NVIDIA drivers and the
+32-bit driver stay adopted, not declared; multilib must be enabled for the
+`lib32-*` entries.
+
+`exclude:` carries only `noctalia`, mirroring `stump`. There are no
+package-level exclusions because the shared modules declare only names that
+resolve on CachyOS.
+
 ## Adopted baseline
 
-`stump` did not start from the minimal profile in
-[docs/installation.md](installation.md). It is an existing CachyOS desktop that
-dcli was retrofitted onto, so it carries roughly 171 packages the config does
+`stump` and `whimsyforge` did not start from the minimal profile in
+[docs/installation.md](installation.md). They are existing CachyOS systems that
+dcli was retrofitted onto. `stump` carries roughly 171 packages the config does
 not declare, plus 7 flatpak runtime layers that flatpak manages itself.
+`whimsyforge` carries its own uncounted baseline; count it before relying on
+the number.
 
 Those are deliberately left unmanaged. They are the OS installer's artifacts,
-hardware drivers for this machine's GPU and firmware, kernels and boot tooling,
+hardware drivers for each machine's GPU and firmware, kernels and boot tooling,
 desktop fonts, and storage utilities implied by the chosen layout. Declaring
-them would tie the configuration to one distro release and to this exact
+them would tie the configuration to one distro release and to exact
 hardware, and none of it is portable to `machine-serial`.
 
 A small, deliberate subset *is* declared, because the configuration depends on
@@ -97,40 +139,43 @@ it or because it is a genuine choice rather than installer residue:
 
 - `paru` and `cachyos-fish-config`, in the `cachyos` module. The first backs
   `aur_helper`, the second is the file `config.fish` sources.
-- `timeshift`, in `base`, because both hosts set it as the backup tool.
+- `timeshift`, in `base`, because all hosts set it as the backup tool.
 - `cli-tools` and `editors`, curated from the packages the user actually chose.
 
 Everything else stays adopted and undeclared. This is a decision, not an
 oversight.
 
-## Never prune `stump`
+## Never prune CachyOS hosts
 
-`dcli sync --prune` removes packages that are not declared, which on this host
+`dcli sync --prune` removes packages that are not declared, which on these hosts
 means the entire adopted baseline: `linux-cachyos`, every `cachyos-*` package,
-`nvidia-580xx-dkms`, and the desktop session.
+the NVIDIA drivers, and the desktop session.
 
-It is also impossible to review safely here. `stump` runs sequential module
+It is also impossible to review safely here. Both hosts run sequential module
 processing, and `dcli sync --dry-run` reports that dry run is not supported in
 sequential mode, so there is no way to preview the removals before applying
-them. The documented precondition for prune cannot be satisfied on this host.
+them. The documented precondition for prune cannot be satisfied on either host.
 
 `auto_prune` is `false`, so this only matters when `--prune` is passed
-explicitly. Treat that flag as forbidden on `stump` until a future pass adopts
+explicitly. Treat that flag as forbidden on `stump` and `whimsyforge` until a future pass adopts
 the baseline into a managed module or sequential dry-run support lands.
 
 ## Deferral
 
-`machine-serial` is dormant so that `stump` can be stabilised first. Three
-module changes assume a stump-only world and must be reverted when that host
+`machine-serial` is dormant so that the CachyOS hosts can be stabilised first. Four
+module changes assume a CachyOS-only world and must be reverted when that host
 comes back:
 
 - `modules/git/packages.yaml` declares `github-cli` only. Re-add `gh` for the
-  apt name, then exclude it on `stump`.
+  apt name, then exclude it on `stump` and `whimsyforge`.
 - `modules/browser/packages.yaml` declares `brave-bin` only. Re-add
-  `brave-browser` for the apt name, then exclude it on `stump`.
+  `brave-browser` for the apt name, then exclude it on `stump` and `whimsyforge`.
 - `modules/ssh/packages.yaml` declares `openssh`. On Ubuntu that name is a
   metapackage that also pulls in `openssh-server`. Re-add `openssh-client` as
   a separate entry and exclude `openssh` on `machine-serial`.
+- `modules/desktop-gnome/packages.yaml` declares `gnome-shell` and `gdm` only.
+  Re-add `ubuntu-desktop-minimal` for the apt name, then exclude it on `stump`
+  and `whimsyforge`.
 
 The per-host `exclude:` mechanism is unreliable in `dcli sync` until the
 upstream defect recorded in `.local/dcli-bugs.md` is fixed, so restoring both

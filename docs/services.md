@@ -1,11 +1,12 @@
 # Services
 
-Minimal service and default-app policy for both hosts.
+Minimal service and default-app policy for all hosts.
 
 ## Services
 
-Both hosts enable `NetworkManager`, which the distro installers provide.
-`stump` also enables `greetd`, supplied by the Noctalia module. Add services
+All hosts enable `NetworkManager`, which the distro installers provide.
+`stump` also enables `greetd`, supplied by the Noctalia module.
+`whimsyforge` also enables `gdm`, supplied by the `desktop-gnome` module. Add services
 only with a package that provides them.
 
 ```yaml
@@ -13,6 +14,7 @@ services:
   enabled:
     - NetworkManager
     - greetd # stump only
+    - gdm # whimsyforge only
   disabled: []
 ```
 
@@ -24,12 +26,13 @@ dcli merge --services
 
 ## Default apps
 
-Both hosts set Brave as the user-scope browser.
+All hosts set Brave as the user-scope browser. The CachyOS hosts also set Alacritty as the user-scope terminal.
 
 ```yaml
 default_apps:
   scope: user
   browser: brave-browser.desktop
+  terminal: Alacritty.desktop # stump and whimsyforge only
 ```
 
 Default applications use the installed `.desktop` file ID, not a package or
@@ -56,7 +59,7 @@ for recovery and compatibility guidance.
 
 ## System backups
 
-Both hosts take system snapshots with timeshift, driven by dcli rather than by
+All hosts take system snapshots with timeshift, driven by dcli rather than by
 timeshift's own timers.
 
 ```yaml
