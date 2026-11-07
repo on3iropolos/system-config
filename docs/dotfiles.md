@@ -89,9 +89,11 @@ accident, but that guard only covers the known naming patterns.
 own `config.fish` and keeps host-specific content such as the CachyOS shell
 config out of the shared layer.
 
-The fragment starts an `ssh-agent` when none is reachable and adds
-`~/.ssh/on3iropolos-ssh` to it. fish cannot call `eval` during startup, so the
-agent output is captured with `string match` rather than
+The fragment starts an `ssh-agent` when none is reachable. It adds
+`~/.ssh/on3iropolos-ssh` only when the agent does not already hold it, because
+`ssh-add` asks for the passphrase even for a loaded key; this keeps the prompt
+to once per login instead of once per shell. fish cannot call `eval` during
+startup, so the agent output is captured with `string match` rather than
 `eval "$(ssh-agent -s)"`; the latter fails at startup and leaks an agent process.
 A socket left behind by a killed agent is treated as missing and restarted.
 

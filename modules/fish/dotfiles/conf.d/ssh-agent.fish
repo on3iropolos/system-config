@@ -10,6 +10,10 @@ if not set -q SSH_AUTH_SOCK; or not test -S "$SSH_AUTH_SOCK"
     set -gx SSH_AGENT_PID (string match -r 'SSH_AGENT_PID=([0-9]+)' -- $__agent_out)[2]
 end
 
-# Key material is created manually; silence the prompt in non-interactive
-# shells so scp, editors and cron do not hang on a passphrase.
-command ssh-add -- ~/.ssh/on3iropolos-ssh 2>/dev/null
+# ssh-add asks for the passphrase even when the agent already holds the key, so
+# only add it when the agent lacks it. Key material is still created manually.
+set -l __key ~/.ssh/on3iropolos-ssh
+set -l __fingerprint (command ssh-keygen -lf "$__key.pub" 2>/dev/null | string match -r 'SHA256:[^ ]+')
+if test -z "$__fingerprint"; or not command ssh-add -l 2>/dev/null | string match -q -- "*$__fingerprint*"
+    command ssh-add -- "$__key" 2>/dev/null
+end

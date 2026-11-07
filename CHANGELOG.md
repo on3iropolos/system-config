@@ -21,6 +21,7 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 
 ### Changed
 
+- The fish ssh-agent fragment now checks the running agent before adding the key, so the passphrase is requested once per login instead of on every shell start.
 - `noctalia` now installs Kitty and manages `greetd` with the
   `noctalia-greeter-session` wrapper for graphical login on `stump`.
 - Umbriel now autostarts Noctalia and supplies its standard IPC keybindings.
