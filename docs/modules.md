@@ -17,9 +17,9 @@ Reference for all eighteen modules. Must stay in sync with `modules/*/module.yam
 | security | Bitwarden password manager | bitwarden | none | none | machine-serial, stump, whimsyforge |
 | dev | opencode AI agent | opencode | `install-opencode.sh` | none | machine-serial, stump, whimsyforge |
 | media | Stremio and Spotify streaming apps | flatpak:com.stremio.Stremio, flatpak:com.spotify.Client | none | none | stump, whimsyforge |
-| desktop-gnome | GNOME desktop | gnome-shell, gdm | none | none | whimsyforge (machine-serial deferred) |
+| desktop-gnome | GNOME desktop | gnome-shell, gdm, gnome-session, gnome-control-center, nautilus | none | none | whimsyforge (machine-serial deferred) |
 | gaming | Steam gaming tools | steam, gamemode, lib32-gamemode, mangohud, lib32-mangohud, gamescope, goverlay | none | none | whimsyforge |
-| firewall | UFW firewall with SSH and libvirt rules | ufw | `apply-ufw.sh` | none | stump, whimsyforge |
+| firewall | UFW default-deny firewall | ufw | `apply-ufw.sh` | none | stump, whimsyforge |
 | docker | Docker engine with shared daemon config | docker | `configure-daemon.sh` | none | stump, whimsyforge |
 | obsidian | Obsidian notes with shared vault pointer | obsidian | none | `~/.config/obsidian/obsidian.json` | stump, whimsyforge |
 | noctalia | Noctalia + Umbriel + Greeter | alacritty, greetd, noctalia, umbriel, noctalia-greeter, python | `configure-greetd.sh` | sync `dotfiles/` | stump |
@@ -60,15 +60,17 @@ Reference for all eighteen modules. Must stay in sync with `modules/*/module.yam
   needs a manual install.
 - `media` declares `flatpak:com.stremio.Stremio` for Stremio, the Flathub flatpak ref, so no distro package name is needed. It is enabled on `stump` and `whimsyforge`.
 - `media` declares `flatpak:com.spotify.Client` for Spotify, the Flathub flatpak ref, so no distro package name is needed; it rides along with the Stremio entry.
-- `gnome-shell` and `gdm` are the CachyOS names in `desktop-gnome`, scoped to
-  `whimsyforge`. The apt name `ubuntu-desktop-minimal` is deferred with
-  `machine-serial`.
+- `gnome-shell`, `gdm`, `gnome-session`, `gnome-control-center`, and `nautilus`
+  are the CachyOS names in `desktop-gnome`, scoped to `whimsyforge`. The set
+  covers a minimal-base install (session, login, settings, files); iterate
+  post-rebuild if anything is missing. The apt name `ubuntu-desktop-minimal`
+  is deferred with `machine-serial`.
 - `gaming` declares Steam plus gamemode, mangohud, gamescope, and goverlay on
   `whimsyforge` only. Multilib must be enabled for the `lib32-*` entries, and
   the NVIDIA drivers stay adopted rather than declared.
-- `ufw` is declared in `firewall` with the default-deny policy plus SSH and
-  `virbr0` rules; the hook enables the firewall, so the rules apply on both
-  CachyOS hosts even though only `whimsyforge` runs libvirt guests.
+- `ufw` is declared in `firewall` as pure default-deny with no exceptions: the
+  rebuilt hosts run no inbound services and no libvirt. Declare any future
+  allow rule in `apply-ufw.sh`.
 - `docker` is declared with the shared `/etc/docker/daemon.json`
   (172.31.0.0/16 pool, live-restore, no userland-proxy). Daemon changes need a
   manual `systemctl restart docker`; group membership stays manual and adopted.

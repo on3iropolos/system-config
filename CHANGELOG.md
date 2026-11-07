@@ -27,6 +27,8 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 
 ### Changed
 
+- The `firewall` module is now pure default-deny with no exceptions: the rebuilt hosts run no inbound services and no libvirt, so the SSH and `virbr0` rules are gone. Do not sync this on the old `whimsyforge` before the rebuild while `sshd` still runs there.
+- `desktop-gnome` now also declares `gnome-session`, `gnome-control-center`, and `nautilus` so a minimal-base install yields a working session.
 - `stump` and `whimsyforge` now also enable `firewall`, `docker`, and `obsidian`, and declare the `docker` and `ufw` services.
 - The AUR `spotify` package and the system-scope Spotify flatpak are removed; the declared user-scope flatpak is the only copy.
 - `bitwarden-cli` is removed; only the desktop vault stays declared.

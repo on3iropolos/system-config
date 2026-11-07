@@ -48,9 +48,9 @@ Details: [docs/hosts.md](docs/hosts.md) and `hosts/machine-serial.yaml`, `hosts/
 | security | Bitwarden password manager | bitwarden | none | none | machine-serial, stump, whimsyforge |
 | dev | opencode AI agent | opencode | `install-opencode.sh` | none | machine-serial, stump, whimsyforge |
 | media | Stremio and Spotify streaming apps | flatpak:com.stremio.Stremio, flatpak:com.spotify.Client | none | none | stump, whimsyforge |
-| desktop-gnome | GNOME desktop | gnome-shell, gdm | none | none | whimsyforge (machine-serial deferred) |
+| desktop-gnome | GNOME desktop | gnome-shell, gdm, gnome-session, gnome-control-center, nautilus | none | none | whimsyforge (machine-serial deferred) |
 | gaming | Steam gaming tools | steam, gamemode, lib32-gamemode, mangohud, lib32-mangohud, gamescope, goverlay | none | none | whimsyforge |
-| firewall | UFW firewall with SSH and libvirt rules | ufw | `apply-ufw.sh` | none | stump, whimsyforge |
+| firewall | UFW default-deny firewall | ufw | `apply-ufw.sh` | none | stump, whimsyforge |
 | docker | Docker engine with shared daemon config | docker | `configure-daemon.sh` | none | stump, whimsyforge |
 | obsidian | Obsidian notes with shared vault pointer | obsidian | none | `~/.config/obsidian/obsidian.json` | stump, whimsyforge |
 | noctalia | Noctalia + Umbriel + Greeter | noctalia, umbriel, noctalia-greeter | none | sync `dotfiles/` | stump |

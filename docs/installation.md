@@ -17,10 +17,25 @@ Our preferences for `stump`:
 - User `on3i`, hostname `stump` set in the installer (`hostnamectl` below is a fallback).
 
 Our preferences for `whimsyforge` match `stump` except for the desktop: GNOME
-instead of Noctalia plus Umbriel plus Greeter. It is an existing system, so
-there is no fresh-install path; enable multilib in `/etc/pacman.conf` for the
-`gaming` module `lib32-*` entries and confirm the 32-bit NVIDIA driver is
-present.
+instead of Noctalia plus Umbriel plus Greeter. Minimal base (`No Desktop`
+selection); dcli provides the session-critical GNOME set
+(`gnome-shell`, `gdm`, `gnome-session`, settings, files). Same disk, `btrfs`,
+encryption, `Limine`, kernel, and driver preferences as `stump`, with user
+`on3i` and hostname `whimsyforge`. Confirm multilib is enabled in
+`/etc/pacman.conf` (CachyOS default) for the `gaming` module `lib32-*`
+entries.
+
+### Before wiping whimsyforge
+
+The rebuild destroys the disk, including timeshift snapshots. Back up user
+data externally first (`~/notes`, `~/projects`, `~/.ssh`, opencode config,
+and anything else outside this repo), then commit and push this repository so
+the recipe itself survives. The old SSH host key dies with the disk: generate
+a fresh key pair per [SSH identity](#ssh-identity) and register it on GitHub.
+
+Do not sync the stripped default-deny firewall on the old system before the
+rebuild: it carries no SSH rule and would cut off remote access while `sshd`
+still runs there.
 
 Install build tools, an AUR helper, and Flatpak first.
 CachyOS no longer preinstalls `paru`, which stays declared on the CachyOS hosts because

@@ -1,7 +1,11 @@
 description: GNOME desktop on CachyOS and Ubuntu
 
-# Whimsyforge-only package set. `ubuntu-desktop-minimal` is the Ubuntu name
+# Whimsyforge set: session-critical packages for a minimal-base install.
+# `ubuntu-desktop-minimal` is the Ubuntu name
 # and is re-added when machine-serial is brought back; see CHANGELOG.
 packages:
   - gnome-shell # pacman: gnome-shell | apt: n/a (deferred, machine-serial dormant)
   - gdm # pacman: gdm | apt: n/a (deferred, machine-serial dormant)
+  - gnome-session # Wayland session + gdm entry (pacman: gnome-session)
+  - gnome-control-center # Settings (pacman: gnome-control-center)
+  - nautilus # Files (pacman: nautilus)

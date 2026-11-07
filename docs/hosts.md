@@ -151,20 +151,21 @@ it or because it is a genuine choice rather than installer residue:
 Everything else stays adopted and undeclared. This is a decision, not an
 oversight.
 
-## Ansible remainder
+## Not carried into the rebuild
 
-`whimsyforge` was previously managed by the `gnome-network-ansible` playbooks.
-The migrated pieces now live in the `firewall`, `docker`, `obsidian`, and
-`editors` modules plus the `docker` and `ufw` service entries.
-What stays adopted and out of dcli scope:
+`whimsyforge` was previously managed by the `gnome-network-ansible` playbooks
+and will be wiped and recreated from this repository. The migrated pieces now
+live in the `firewall`, `docker`, `obsidian`, and `editors` modules plus the
+`docker` and `ufw` service entries. Deliberately left behind:
 
-- `ollama` and the `vm_host` libvirt stack: installed and running, undeclared.
+- `ollama` and the `vm_host` libvirt stack: not declared, not reinstalled.
 - The `k3d` dev-cluster and hindsight namespace: live state with no dcli
-  primitive; the ansible repo remains its reference.
-- The `sshd` server: enabled with its hardened config, but only the client
-  side is managed (see the `ssh` module). Server config stays manual.
+  primitive; the ansible repo remains its only reference.
+- The `sshd` server: only the client side is managed (see the `ssh` module).
+  The rebuilt host runs no ssh server, so the firewall carries no SSH rule.
 - One-time provisioning: user account, sudoers, `~/projects` clones, group
   memberships (including the `docker` group), and the GCR ssh-agent env file.
+  These are recreated by hand or by the OS installer on the new system.
 
 ## Never prune CachyOS hosts
 
