@@ -21,6 +21,7 @@ enabled_modules:
   - gaming
   - firewall
   - docker
+  - rclone
   - obsidian
 
 # All packages live in modules. Keep this empty.

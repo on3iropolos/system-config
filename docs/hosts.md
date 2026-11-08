@@ -10,8 +10,8 @@ Reference for all three host files. Must stay in sync with `hosts/*.yaml`.
 | Host | File | Distro | Manager | Processing | Modules |
 |---|---|---|---|---|---|
 | machine-serial | `hosts/machine-serial.yaml` | Ubuntu | apt | parallel | base, browser, security, dev, desktop-gnome |
-| stump | `hosts/stump.yaml` | CachyOS | pacman + paru | sequential | base, cachyos, git, ssh, fish, cli-tools, editors, browser, security, dev, media, noctalia, firewall, docker, obsidian |
-| whimsyforge | `hosts/whimsyforge.yaml` | CachyOS | pacman + paru | sequential | base, cachyos, git, ssh, fish, cli-tools, editors, browser, security, dev, media, desktop-gnome, gaming, firewall, docker, obsidian |
+| stump | `hosts/stump.yaml` | CachyOS | pacman + paru | sequential | base, cachyos, git, ssh, fish, cli-tools, editors, browser, security, dev, media, noctalia, firewall, docker, rclone, obsidian |
+| whimsyforge | `hosts/whimsyforge.yaml` | CachyOS | pacman + paru | sequential | base, cachyos, git, ssh, fish, cli-tools, editors, browser, security, dev, media, desktop-gnome, gaming, firewall, docker, rclone, obsidian |
 
 ## machine-serial
 
@@ -66,6 +66,7 @@ enabled_modules:
   - noctalia
   - firewall
   - docker
+  - rclone
   - obsidian
 packages: []
 exclude:
@@ -108,6 +109,7 @@ enabled_modules:
   - gaming
   - firewall
   - docker
+  - rclone
   - obsidian
 packages: []
 exclude:

@@ -1,6 +1,6 @@
 # Modules
 
-Reference for all eighteen modules. Must stay in sync with `modules/*/module.yaml` and `modules/*/packages.yaml`.
+Reference for all nineteen modules. Must stay in sync with `modules/*/module.yaml` and `modules/*/packages.yaml`.
 
 ## Modules
 
@@ -21,7 +21,8 @@ Reference for all eighteen modules. Must stay in sync with `modules/*/module.yam
 | gaming | Steam gaming tools | steam, gamemode, lib32-gamemode, mangohud, lib32-mangohud, gamescope, goverlay | none | none | whimsyforge |
 | firewall | UFW default-deny firewall | ufw | `apply-ufw.sh` | none | stump, whimsyforge |
 | docker | Docker engine with shared daemon config | docker | `configure-daemon.sh` | none | stump, whimsyforge |
-| obsidian | Obsidian notes with shared vault pointer | obsidian | none | `~/.config/obsidian/obsidian.json` | stump, whimsyforge |
+| obsidian | Obsidian notes with shared vault pointer | obsidian | `ensure-notes-dir.sh` | `~/.config/obsidian/obsidian.json` | stump, whimsyforge |
+| rclone | Google Drive notes sync to ~/notes | rclone | `enable-sync-timer.sh` | `~/.config/systemd/user/rclone-notes.{service,timer}` | stump, whimsyforge |
 | noctalia | Noctalia + Umbriel + Greeter | alacritty, greetd, noctalia, umbriel, noctalia-greeter, python | `configure-greetd.sh` | sync `dotfiles/` | stump |
 | cachyos-repo | CachyOS repo | cachyos-keyring, cachyos-mirrorlist | `add-cachyos-repo.sh` | none | not enabled |
 
@@ -75,8 +76,13 @@ Reference for all eighteen modules. Must stay in sync with `modules/*/module.yam
   (172.31.0.0/16 pool, live-restore, no userland-proxy). Daemon changes need a
   manual `systemctl restart docker`; group membership stays manual and adopted.
 - `obsidian` declares the package plus the managed vault pointer at
-  `~/.config/obsidian/obsidian.json`. The `~/notes` directory itself stays
-  manual; create it on hosts that lack it.
+  `~/.config/obsidian/obsidian.json`. The `~/notes` directory is created by
+  the module hook (`ensure-notes-dir.sh`); open `~/notes` as the vault on
+  first launch.
+- `rclone` bisyncs `gdrive:notes` with `~/notes` through the user timer
+  `rclone-notes.timer` (5 minutes, newer-wins, deletes propagate). The
+  `gdrive` remote is manual per machine (`rclone config`); see the
+  [notes sync timer](services.md#notes-sync-timer).
 - The `editors` hook installs the shared VSCodium set (`ms-python.python`,
   `hashicorp.terraform`, `ms-azuretools.vscode-docker`). It only adds;
   unwanted extensions stay a manual `codium --uninstall-extension`.
@@ -99,6 +105,8 @@ are set in each `module.yaml`.
 - `install-opencode.sh` runs as the dev post-install hook, on ask, as the user.
 - `add-cachyos-repo.sh` runs as the cachyos-repo pre-install hook, once, as root.
 - `install-extensions.sh` runs as the editors post-install hook, on ask, as the user.
+- `ensure-notes-dir.sh` runs as the obsidian post-install hook, always, as the user.
+- `enable-sync-timer.sh` runs as the rclone post-install hook, always, as the user.
 - `configure-greetd.sh` runs as the noctalia post-install hook, always, as root.
 
 ## Dotfile notes

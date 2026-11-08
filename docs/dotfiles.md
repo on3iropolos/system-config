@@ -1,8 +1,8 @@
 # Dotfiles
 
-Five modules manage dotfiles: `noctalia` for the desktop shell, `obsidian` for
-the notes vault pointer, and `git`, `ssh`, and `fish` for the shared
-command-line identity and login shell.
+Six modules manage dotfiles: `noctalia` for the desktop shell, `obsidian` for
+the notes vault pointer, `rclone` for the notes sync timer, and `git`, `ssh`,
+and `fish` for the shared command-line identity and login shell.
 
 ## How syncing works
 
@@ -54,8 +54,9 @@ the overview hot corner.
 
 `modules/obsidian/dotfiles/obsidian.json` symlinks to
 `~/.config/obsidian/obsidian.json` on both CachyOS hosts and points Obsidian at
-the shared vault in `~/notes`. The notes directory itself is not managed;
-create it with `mkdir ~/notes` on hosts that lack it.
+the shared vault in `~/notes`. The directory is created by the module hooks
+(`obsidian` and `rclone` both run `mkdir -p ~/notes`), so opening `~/notes` as
+the vault works on first launch.
 
 ## Git identity sync
 

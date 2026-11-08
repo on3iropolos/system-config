@@ -1,0 +1,8 @@
+[Unit]
+Description=Rclone bisync of Google Drive notes to ~/notes
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/rclone bisync gdrive:notes %h/notes --conflict-resolve newer --create-empty-src-dirs

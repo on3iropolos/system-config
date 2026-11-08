@@ -20,6 +20,7 @@ enabled_modules:
   - noctalia
   - firewall
   - docker
+  - rclone
   - obsidian
 
 # All packages live in modules. Keep this empty.

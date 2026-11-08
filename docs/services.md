@@ -51,6 +51,31 @@ Capture live defaults before editing.
 dcli merge --defaults
 ```
 
+## Notes sync timer
+
+The `rclone` module bisyncs the `notes` folder in Google Drive
+(`gdrive:notes`) with `~/notes` every 5 minutes through the user units
+`rclone-notes.service` and `rclone-notes.timer`. Sync is two-way with
+newer-wins conflicts and propagating deletes; the first run against an
+authenticated remote resyncs with Drive winning. Failures log to the user
+journal and retry on the next tick:
+
+```bash
+systemctl --user status rclone-notes.timer
+journalctl --user -u rclone-notes.service
+```
+
+The `gdrive` remote holds OAuth credentials, so it stays manual: run
+`rclone config` once per machine, then re-run `dcli sync` for the first
+resync. With no remote configured, the hook prints those steps and skips
+the sync instead of failing. It also skips the first resync when the Drive
+folder looks empty, so a move or API hiccup up there never mirrors
+emptiness down into `~/notes`. `--check-access` is deliberately not used:
+on this rclone version it aborts even `--resync` runs when markers are
+absent, and resyncs never create them, so it would fail every run. Enabling the timer needs a systemd user
+session; from a context without one (e.g. under `sudo`), the hook prints
+the manual `systemctl --user` fallback and exits 0.
+
 ## Noctalia greeter
 
 The `noctalia` module configures `/etc/greetd/config.toml` through its

@@ -1,0 +1,10 @@
+[Unit]
+Description=Sync ~/notes with Google Drive notes every 5 minutes
+
+[Timer]
+OnBootSec=2min
+OnUnitActiveSec=5min
+Unit=rclone-notes.service
+
+[Install]
+WantedBy=timers.target

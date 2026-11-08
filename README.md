@@ -28,8 +28,8 @@ symlinked to it. Commit and push configuration changes separately through the
 | Host | Distro | Pkg manager | Modules enabled | Purpose |
 |---|---|---|---|---|
 | `machine-serial` | Ubuntu | apt | base, git, ssh, fish, browser, security, dev, desktop-gnome | Work laptop, GNOME |
-| `stump` | CachyOS | pacman + paru | base, git, ssh, fish, browser, security, dev, media, noctalia, firewall, docker, obsidian | Home laptop, Noctalia |
-| `whimsyforge` | CachyOS | pacman + paru | base, git, ssh, fish, browser, security, dev, media, desktop-gnome, gaming, firewall, docker, obsidian | Home desktop, GNOME |
+| `stump` | CachyOS | pacman + paru | base, git, ssh, fish, browser, security, dev, media, noctalia, firewall, docker, rclone, obsidian | Home laptop, Noctalia |
+| `whimsyforge` | CachyOS | pacman + paru | base, git, ssh, fish, browser, security, dev, media, desktop-gnome, gaming, firewall, docker, rclone, obsidian | Home desktop, GNOME |
 
 Details: [docs/hosts.md](docs/hosts.md) and `hosts/machine-serial.yaml`, `hosts/stump.yaml`, plus `hosts/whimsyforge.yaml`.
 
@@ -52,7 +52,8 @@ Details: [docs/hosts.md](docs/hosts.md) and `hosts/machine-serial.yaml`, `hosts/
 | gaming | Steam gaming tools | steam, gamemode, lib32-gamemode, mangohud, lib32-mangohud, gamescope, goverlay | none | none | whimsyforge |
 | firewall | UFW default-deny firewall | ufw | `apply-ufw.sh` | none | stump, whimsyforge |
 | docker | Docker engine with shared daemon config | docker | `configure-daemon.sh` | none | stump, whimsyforge |
-| obsidian | Obsidian notes with shared vault pointer | obsidian | none | `~/.config/obsidian/obsidian.json` | stump, whimsyforge |
+| obsidian | Obsidian notes with shared vault pointer | obsidian | `ensure-notes-dir.sh` | `~/.config/obsidian/obsidian.json` | stump, whimsyforge |
+| rclone | Google Drive notes sync to ~/notes | rclone | `enable-sync-timer.sh` | `~/.config/systemd/user/rclone-notes.{service,timer}` | stump, whimsyforge |
 | noctalia | Noctalia + Umbriel + Greeter | noctalia, umbriel, noctalia-greeter | none | sync `dotfiles/` | stump |
 | cachyos-repo | CachyOS repo | cachyos-keyring, cachyos-mirrorlist | `add-cachyos-repo.sh` | none | not enabled |
 
@@ -83,4 +84,5 @@ Hook behavior and users are detailed in [docs/modules.md](docs/modules.md).
 - [docs/dotfiles.md](docs/dotfiles.md) — Noctalia dotfiles sync.
 - [docs/services.md](docs/services.md) — services and default apps.
 - [docs/troubleshooting.md](docs/troubleshooting.md) — fixes.
+- [docs/runbooks/](docs/runbooks/) — single-task runbooks (Drive client ID, new-machine sync).
 - [CHANGELOG.md](CHANGELOG.md) — release notes.
