@@ -1,0 +1,16 @@
+description: Google Drive notes sync to ~/notes on both CachyOS hosts
+
+dotfiles:
+  - source: dotfiles/rclone-notes.service
+    target: ~/.config/systemd/user/rclone-notes.service
+  - source: dotfiles/rclone-notes.timer
+    target: ~/.config/systemd/user/rclone-notes.timer
+
+# Installs the user timer that bisyncs gdrive:notes with ~/notes every
+# 5 minutes. When the gdrive remote is missing it prints the guided
+# `rclone config` steps and skips the sync instead of failing. The first run
+# against an authenticated remote uses --resync with Drive winning; later
+# runs resolve conflicts with newer-wins. Behavior: always. Runs as the user.
+post_install_hook: scripts/enable-sync-timer.sh
+post_hook_behavior: always
+run_hooks_as_user: true

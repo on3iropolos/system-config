@@ -1,0 +1,4 @@
+description: Google Drive sync for the shared notes vault
+
+packages:
+  - rclone # pacman: rclone | apt: rclone

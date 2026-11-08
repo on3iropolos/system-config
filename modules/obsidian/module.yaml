@@ -1,7 +1,14 @@
 description: Obsidian notes with the shared vault pointer on both CachyOS hosts
 
-# Managed vault pointer. The notes directory itself stays manual; see
-# docs/dotfiles.md.
+# Managed vault pointer. The notes directory itself is created by this
+# module's hook (and by the rclone hook when that module is enabled);
+# see docs/dotfiles.md.
 dotfiles:
   - source: dotfiles/obsidian.json
     target: ~/.config/obsidian/obsidian.json
+
+# Creates ~/notes so the vault opens on first launch even before any sync
+# has run. Behavior: always. Runs as the user.
+post_install_hook: scripts/ensure-notes-dir.sh
+post_hook_behavior: always
+run_hooks_as_user: true
