@@ -6,6 +6,10 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 
 ### Added
 
+- New `rclone` module bisyncing the `notes` folder in Google Drive (`gdrive:notes`) with `~/notes` through the `rclone-notes` user timer (5 minutes, newer-wins, deletes propagate), enabled on `stump` and `whimsyforge`.
+- New `docs/runbooks/rclone-new-machine-sync.md` runbook: remote auth, first resync, timer enable, and verification on a new host.
+- The rclone Drive OAuth client ID and secret live in the Bitwarden Login item `Google API - RClone Google Drive OAuth`; both runbooks now point there.
+- New `obsidian` post-install hook creating `~/notes` so the shared vault opens on first launch.
 - New `firewall` module declaring `ufw` with a default-deny policy plus SSH and `virbr0` rules, enabled on `stump` and `whimsyforge`.
 - New `docker` module declaring `docker` with the shared `/etc/docker/daemon.json`, enabled on `stump` and `whimsyforge`.
 - New `obsidian` module declaring `obsidian` with the managed vault pointer, enabled on `stump` and `whimsyforge`.
@@ -27,6 +31,7 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 
 ### Changed
 
+- The `rclone` notes timer now syncs every 5 minutes instead of 15.
 - The `firewall` module is now pure default-deny with no exceptions: the rebuilt hosts run no inbound services and no libvirt, so the SSH and `virbr0` rules are gone. Do not sync this on the old `whimsyforge` before the rebuild while `sshd` still runs there.
 - `desktop-gnome` now also declares `gnome-session`, `gnome-control-center`, and `nautilus` so a minimal-base install yields a working session.
 - `stump` and `whimsyforge` now also enable `firewall`, `docker`, and `obsidian`, and declare the `docker` and `ufw` services.
@@ -74,6 +79,7 @@ All notable changes to this repository follow [Keep a Changelog](https://keepach
 
 ### Fixed
 
+- The `rclone` sync drops `--check-access` and the hook skips auto-resync against an empty Drive folder. The flag aborted every run including resyncs on this rclone version, and an unattended Drive-wins resync during a folder move could mirror emptiness into `~/notes`.
 - `docs/hosts.md` listed the module sets from before `git`, `ssh`, and `fish`
   were added, so the host reference had drifted from `hosts/*.yaml`.
 - Corrected the claim that `brave-bin` is an AUR package. It ships in the
