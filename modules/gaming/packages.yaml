@@ -1,0 +1,13 @@
+description: Steam gaming tools on the CachyOS home desktop
+
+# CachyOS-only package names. Requires multilib for the lib32 entries and the
+# 32-bit NVIDIA driver, which stay adopted rather than declared. Scoped to
+# `whimsyforge` so these never reach `machine-serial` when that host returns.
+packages:
+  - steam # multilib: Steam client
+  - gamemode # extra: requested by Steam for performance
+  - lib32-gamemode # multilib: 32-bit gamemode for Steam games
+  - mangohud # extra: overlay metrics
+  - lib32-mangohud # multilib: 32-bit overlay for Steam games
+  - gamescope # extra: micro-compositor for games
+  - goverlay # extra: GUI for mangohud

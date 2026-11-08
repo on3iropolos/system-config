@@ -15,6 +15,7 @@ Remote source of truth is `git@github.com:on3iropolos/system-config.git` on bran
 config.yaml
 hosts/machine-serial.yaml
 hosts/stump.yaml
+hosts/whimsyforge.yaml
 hosts/shared/common.yaml
 modules/<name>/module.yaml
 modules/<name>/packages.yaml

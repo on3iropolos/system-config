@@ -1,0 +1,8 @@
+description: Docker engine with the shared daemon configuration on both CachyOS hosts
+
+# Writes /etc/docker/daemon.json before the service starts. Rewrites identical
+# content and restarts nothing; apply daemon changes with a manual
+# `systemctl restart docker`. Behavior: always. Runs as root.
+post_install_hook: scripts/configure-daemon.sh
+post_hook_behavior: always
+run_hooks_as_user: false

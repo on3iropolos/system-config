@@ -1,4 +1,4 @@
-description: Stock GNOME desktop for the Ubuntu work laptop
+description: GNOME desktop on CachyOS and Ubuntu
 
 conflicts:
   - noctalia

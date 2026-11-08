@@ -1,0 +1,4 @@
+description: Obsidian notes on both CachyOS hosts
+
+packages:
+  - obsidian # pacman: obsidian | apt: n/a (deferred, machine-serial dormant)

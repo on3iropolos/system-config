@@ -1,0 +1,8 @@
+description: UFW default-deny firewall on both CachyOS hosts
+
+# Pure default-deny with no exceptions: the rebuilt hosts run no inbound
+# services and no libvirt. Declare any future allow rule in the hook script.
+# Behavior: always. Runs as root.
+post_install_hook: scripts/apply-ufw.sh
+post_hook_behavior: always
+run_hooks_as_user: false

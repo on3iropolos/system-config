@@ -1,0 +1,4 @@
+description: UFW firewall on both CachyOS hosts
+
+packages:
+  - ufw # pacman: ufw | apt: n/a (deferred, machine-serial dormant)

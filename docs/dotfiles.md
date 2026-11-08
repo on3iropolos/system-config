@@ -1,7 +1,8 @@
 # Dotfiles
 
-Four modules manage dotfiles: `noctalia` for the desktop shell, and `git`, `ssh`,
-and `fish` for the shared command-line identity and login shell.
+Five modules manage dotfiles: `noctalia` for the desktop shell, `obsidian` for
+the notes vault pointer, and `git`, `ssh`, and `fish` for the shared
+command-line identity and login shell.
 
 ## How syncing works
 
@@ -49,9 +50,16 @@ commented at the top (`Mod+Comma` settings, `Mod+Space` launcher,
 3000x2000 panel at 1.5 scale, with lid events, Noctalia blur/layer rules, and
 the overview hot corner.
 
+## Obsidian vault sync
+
+`modules/obsidian/dotfiles/obsidian.json` symlinks to
+`~/.config/obsidian/obsidian.json` on both CachyOS hosts and points Obsidian at
+the shared vault in `~/notes`. The notes directory itself is not managed;
+create it with `mkdir ~/notes` on hosts that lack it.
+
 ## Git identity sync
 
-`modules/git/dotfiles/gitconfig` symlinks to `~/.gitconfig` on both machines and
+`modules/git/dotfiles/gitconfig` symlinks to `~/.gitconfig` on all machines and
 sets the shared account name, email, and default branch.
 
 Because the file is a symlink, `git config --global` writes directly into this
@@ -60,7 +68,7 @@ stray global edit turns into an uncommitted change here.
 
 ## SSH client sync
 
-`modules/ssh/dotfiles/config` symlinks to `~/.ssh/config` on both machines and
+`modules/ssh/dotfiles/config` symlinks to `~/.ssh/config` on all machines and
 declares the `github.com` host with `IdentityFile ~/.ssh/on3iropolos-ssh`,
 `IdentitiesOnly yes`, and `AddKeysToAgent 4h`.
 
@@ -72,8 +80,8 @@ passphrase is normally entered once per reboot instead of once per terminal.
 
 Private keys are never committed and never managed by dcli. Each machine
 generates its own key pair at `~/.ssh/on3iropolos-ssh` and registers only the
-public half on the GitHub account, so the two hosts can be revoked
-independently and neither compromise exposes the other.
+public half on the GitHub account, so the hosts can be revoked
+independently and no compromise exposes the others.
 
 OpenSSH refuses to load a private key that other users can read. Run
 `chmod 600 ~/.ssh/on3iropolos-ssh` after generating it; a key left at mode
@@ -84,7 +92,7 @@ accident, but that guard only covers the known naming patterns.
 ## fish sync
 
 `modules/fish/dotfiles/conf.d/ssh-agent.fish` symlinks to
-`~/.config/fish/conf.d/ssh-agent.fish` on both machines. fish auto-loads every
+`~/.config/fish/conf.d/ssh-agent.fish` on all machines. fish auto-loads every
 `*.fish` file in `conf.d/`, so this fragment stays separate from each machine's
 own `config.fish` and keeps host-specific content such as the CachyOS shell
 config out of the shared layer.
